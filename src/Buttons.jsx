@@ -1,17 +1,17 @@
-function decider(val, setFilter, setValues, handleClearStorage) {
+function decider(val, setFilter, handleClearStorage) {
   if (val != "Clear_Storage") {
     setFilter(val);
   } else {
     handleClearStorage();
   }
 }
-function Button({ val, isPressed, setFilter, setValues, handleClearStorage }) {
+function Button({ val, isPressed, setFilter, handleClearStorage }) {
   return (
     <button
       type="button"
       className="btn toggle-btn"
       aria-pressed={isPressed}
-      onClick={() => decider(val, setFilter, setValues, handleClearStorage)}
+      onClick={() => decider(val, setFilter, handleClearStorage)}
     >
       <span className="visually-hidden">Show </span>
 
