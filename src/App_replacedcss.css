@@ -10,7 +10,25 @@
 }
 html {
   font: 62.5% / 1.15 sans-serif;
-  background: radial-gradient(circle, red, yellow, red);
+  background: linear-gradient(to right,
+    #ff4e00,   /* bright orange */
+    #ff8c00,   /* dark orange */
+    #ffd700,   /* gold/yellow */
+    #b22222,   /* firebrick red */
+    #4b1a00    /* very dark brown/charcoal */
+  );
+  background-size: 200% 200%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+    transform: (0deg);
+  }
+  100% {
+    background-position: 100% 50%;
+    transform: (360deg);
+  }
 }
 h1,
 h2 {
