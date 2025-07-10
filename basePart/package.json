@@ -12,6 +12,7 @@
     "format": "prettier --write .",
     "clean-buildfiles": "rimraf ..//docs",
     "make-buildfiles": "md ..\\docs",
+    "deploy": "gh-pages -d dist",
     "copy-build": "cp -r dist/* ../docs/",
     "clean-dist": "rimraf dist",
     "move-build": "npm run clean-buildfiles && npm run make-buildfiles && npm run copy-build && npm run clean-dist",
