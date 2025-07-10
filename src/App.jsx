@@ -6,6 +6,25 @@ import { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
 
 function App() {
+  const [storageCleared, setStorageCleared] = useState(false);
+  function handleClearStorage() {
+    const admin = prompt("Enter secret admin password");
+    if (admin !== "1234") {
+      alert("You don't have permission to clear the local storage");
+    } else {
+      localStorage.clear();
+      setValues([]);
+      setStorageCleared(true);
+    }
+  }
+
+  useEffect(() => {
+    if (storageCleared) {
+      alert("Local storage cleared");
+      setStorageCleared(false);
+    }
+  }, [storageCleared]);
+
   function editTask(id, newName) {
     const editedTasks = currentVal.map((task) => {
       if (id === task.id) {
@@ -66,6 +85,7 @@ function App() {
       isPressed={name === filter}
       setFilter={setFilter}
       setValues={setValues}
+      handleClearStorage={handleClearStorage}
     />
   ));
 

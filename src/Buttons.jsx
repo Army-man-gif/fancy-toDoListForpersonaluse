@@ -1,21 +1,17 @@
-function clear() {
-  localStorage.clear();
-}
-function decider(val, setFilter, setValues) {
+function decider(val, setFilter, setValues, handleClearStorage) {
   if (val != "Clear_Storage") {
     setFilter(val);
   } else {
-    clear();
-    setValues([]);
+    handleClearStorage();
   }
 }
-function Button({ val, isPressed, setFilter, setValues }) {
+function Button({ val, isPressed, setFilter, setValues, handleClearStorage }) {
   return (
     <button
       type="button"
       className="btn toggle-btn"
       aria-pressed={isPressed}
-      onClick={() => decider(val, setFilter, setValues)}
+      onClick={() => decider(val, setFilter, setValues, handleClearStorage)}
     >
       <span className="visually-hidden">Show </span>
 
