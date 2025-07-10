@@ -1,20 +1,31 @@
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore";
 import app from "./firebase.js";
-
+import { useState, useEffect } from "react";
 const db = getFirestore(app);
 
-async function getData() {
-  const querySnapshot = await getDocs(collection(db, "your-collection-name"));
-  const data = [];
-  querySnapshot.forEach((doc) => {
-    data.push({ id: doc.id, ...doc.data() });
-  });
-  return data;
+function Database() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    async function getData() {
+      const querySnapshot = await getDocs(collection(db, "test"));
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push({ id: doc.id, ...doc.data() });
+        setData(data);
+      });
+    }
+    getData().catch((error) => console.error("Error fetching data:", error));
+  }, []);
+  return (
+    <div>
+      <h2>Fetched Data</h2>
+      <ul>
+        {data.map((item) => (
+          <li key={item.id}>{JSON.stringify(item)}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
-async function dataBase() {
-  const result = await getData();
-  return <p>{result}</p>;
-}
-
-export default dataBase;
+export default Database;
