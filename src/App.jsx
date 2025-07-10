@@ -6,14 +6,6 @@ import { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
 
 function App() {
-  function usePrevious(value) {
-    const ref = useRef();
-    useEffect(() => {
-      ref.current = value;
-    });
-    return ref.current;
-  }
-
   function editTask(id, newName) {
     const editedTasks = currentVal.map((task) => {
       if (id === task.id) {
@@ -39,9 +31,13 @@ function App() {
     setValues(updatedTasks);
   }
   function addTask(name) {
-    const newValue = { id: `todo-${nanoid()}`, name: name, isChecked: false };
-    setValues([...currentVal, newValue]);
-    count++;
+    if (name != "") {
+      const newValue = { id: `todo-${nanoid()}`, name: name, isChecked: false };
+      setValues([...currentVal, newValue]);
+      count++;
+    } else {
+      alert("You must enter a task");
+    }
   }
   const [currentVal, setValues] = useState(() => {
     const savedTasks = localStorage.getItem("Tasks");
@@ -60,6 +56,7 @@ function App() {
     All: () => true,
     Active: (task) => !task.isChecked,
     Completed: (task) => task.isChecked,
+    Clear_Storage: () => true,
   };
   const FILTER_NAMES = Object.keys(FILTER_MAP);
   const filterList = FILTER_NAMES.map((name) => (
@@ -68,6 +65,7 @@ function App() {
       val={name}
       isPressed={name === filter}
       setFilter={setFilter}
+      setValues={setValues}
     />
   ));
 
@@ -81,6 +79,13 @@ function App() {
     empty = true;
   }
 
+  function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  }
   const listHeadingRef = useRef(null);
   const prevTaskLength = usePrevious(count);
   useEffect(() => {
