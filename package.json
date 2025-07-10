@@ -21,8 +21,10 @@
     "git": "cd ../fancy-toDoListForpersonaluse && git add . && git commit -m '.' && git push"
   },
   "dependencies": {
+    "prettier": "^3.6.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "rimraf": "^6.0.1",
     "three": "^0.178.0"
   },
   "devDependencies": {
