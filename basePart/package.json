@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "format": "prettier --write .",
     "clean-buildfiles": "rimraf ..//docs",
-    "make-buildfiles": "powershell -Command \"New-Item -ItemType Directory -Force -Path ../docs\"",
+    "make-buildfiles": "md ..\\docs",
     "copy-build": "cp -r dist/* ../docs/",
     "clean-dist": "rimraf dist",
     "move-build": "npm run clean-buildfiles && npm run make-buildfiles && npm run copy-build && npm run clean-dist",
