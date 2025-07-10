@@ -20,8 +20,10 @@ function App() {
 
   useEffect(() => {
     if (storageCleared) {
-      alert("Local storage cleared");
-      setStorageCleared(false);
+      setTimeout(() => {
+        alert("Local storage cleared");
+        setStorageCleared(false);
+      }, 500);
     }
   }, [storageCleared]);
 
