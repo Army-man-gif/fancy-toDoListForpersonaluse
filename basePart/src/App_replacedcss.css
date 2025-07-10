@@ -8,6 +8,11 @@
   outline: 3px dashed #228bec;
   outline-offset: 0;
 }
+canvas.react-confetti-canvas {
+  z-index: 9999 !important;
+  position: fixed !important; /* make sure it stays fixed on viewport */
+  pointer-events: none; /* so it doesn't block clicks */
+}
 html {
   font: 62.5% / 1.15 sans-serif;
   background: linear-gradient(

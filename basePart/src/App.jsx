@@ -67,7 +67,7 @@ function App() {
 
   useEffect(() => {
     if (showConfetti) {
-      const timer = setTimeout(() => setShowConfetti(false), 10000); // confetti for 3 seconds
+      const timer = setTimeout(() => setShowConfetti(false), 4000); // confetti for 3 seconds
       return () => clearTimeout(timer);
     }
   }, [showConfetti]);
@@ -137,11 +137,29 @@ function App() {
     }
   }, [count, prevTaskLength]);
 
-  const { width, height } = useWindowSize();
   return (
     <div className="todoapp stack-la  rge">
       <h1>TodoMatic</h1>
-      {showConfetti && <Confetti width={width} height={height} />}
+      {showConfetti && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            pointerEvents: "none",
+            zIndex: 9999, // Make sure it sits on top
+          }}
+        >
+          <Confetti
+            width={window.innerWidth}
+            height={window.innerHeight}
+            numberOfPieces={800}
+            gravity={0.85}
+          />
+        </div>
+      )}
       <Form id="new-todo-input" type="text" addTask={addTask} />
       <div className="filters btn-group stack-exception">{filterList}</div>
       <h2 id="list-heading" tabIndex="-1" ref={listHeadingRef}>

@@ -58,7 +58,7 @@ function Task({
         <input
           id={`view-${id}`}
           type="checkbox"
-          Checked={isChecked}
+          checked={isChecked}
           onChange={() => toggleTaskCompleted(id)}
         />
         <label className="todo-label" htmlFor={`view-${id}`}>
