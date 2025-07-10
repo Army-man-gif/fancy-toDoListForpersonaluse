@@ -69,13 +69,14 @@ optgroup,
 select,
 textarea {
   font-family: inherit;
-  font-size: 100%;
+  font-size: 90%;
   line-height: 1.15;
   margin: 0;
 }
 button,
 input {
   overflow: visible;
+  width: 80%;
 }
 input[type="text"] {
   border-radius: 0;
