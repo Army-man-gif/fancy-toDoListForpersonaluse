@@ -22,6 +22,7 @@
     "git": "cd ../../fancy-toDoListForpersonaluse && git add . && git commit -m '.' && git push"
   },
   "dependencies": {
+    "firebase": "^11.10.0",
     "prettier": "^3.6.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
