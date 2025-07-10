@@ -4,8 +4,11 @@ import Buttons from "./Buttons.jsx";
 import Task from "./Task.jsx";
 import { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
+import Confetti from "react-confetti";
+import { useWindowSize } from "react-use";
 
 function App() {
+  const [showConfetti, setShowConfetti] = useState(false);
   const [storageCleared, setStorageCleared] = useState(false);
   function handleClearStorage() {
     const admin = prompt("Enter secret admin password");
@@ -43,14 +46,32 @@ function App() {
     setValues(remainingTasks);
   }
   function toggleTaskCompleted(id) {
+    let confetti = true;
     const updatedTasks = currentVal.map((task) => {
       if (id === task.id) {
+        if (task.isChecked == true) {
+          confetti = false;
+        }
         return { ...task, isChecked: !task.isChecked };
       }
       return task;
     });
+    if (confetti) {
+      setShowConfetti(true);
+    } else {
+      setShowConfetti(false);
+    }
+    console.log("Confetti triggered?", showConfetti);
     setValues(updatedTasks);
   }
+
+  useEffect(() => {
+    if (showConfetti) {
+      const timer = setTimeout(() => setShowConfetti(false), 10000); // confetti for 3 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [showConfetti]);
+
   function addTask(name) {
     if (name != "") {
       const newValue = { id: `todo-${nanoid()}`, name: name, isChecked: false };
@@ -116,9 +137,11 @@ function App() {
     }
   }, [count, prevTaskLength]);
 
+  const { width, height } = useWindowSize();
   return (
     <div className="todoapp stack-la  rge">
       <h1>TodoMatic</h1>
+      {showConfetti && <Confetti width={width} height={height} />}
       <Form id="new-todo-input" type="text" addTask={addTask} />
       <div className="filters btn-group stack-exception">{filterList}</div>
       <h2 id="list-heading" tabIndex="-1" ref={listHeadingRef}>
