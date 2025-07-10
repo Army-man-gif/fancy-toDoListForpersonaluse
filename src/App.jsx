@@ -87,33 +87,8 @@ function App() {
       listHeadingRef.current.focus();
     }
   }, [count, prevTaskLength]);
-  function addText() {
-    let myObject = {
-      city: "Madrid",
-      greet() {
-        console.log(`Greetings from ${this.city}`);
-      },
-    };
-    document.getElementById("text").textContent = myObject.city;
-    const personPrototype = {
-      greet() {
-        console.log("hello!");
-      },
-    };
-
-    const carl = Object.create(personPrototype);
-    carl.greet(); // hello!
-    do {
-      myObject = Object.getPrototypeOf(myObject);
-      console.log(myObject);
-    } while (myObject);
-  }
   return (
     <div className="todoapp stack-la  rge">
-      <p id="text">Text</p>
-      <button type="button" onClick={addText}>
-        Objects
-      </button>
       <h1>TodoMatic</h1>
       <Form id="new-todo-input" type="text" addTask={addTask} />
       <div className="filters btn-group stack-exception">{filterList}</div>
