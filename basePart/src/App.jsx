@@ -5,7 +5,6 @@ import Task from "./Task.jsx";
 import { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
-import { useWindowSize } from "react-use";
 
 function App() {
   const [showConfetti, setShowConfetti] = useState(false);
