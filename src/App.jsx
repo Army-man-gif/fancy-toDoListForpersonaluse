@@ -43,9 +43,15 @@ function App() {
     setValues([...currentVal, newValue]);
     count++;
   }
-  const values = [];
+  const [currentVal, setValues] = useState(() => {
+    const savedTasks = localStorage.getItem("Tasks");
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
 
-  const [currentVal, setValues] = useState(values);
+  useEffect(() => {
+    localStorage.setItem("Tasks", JSON.stringify(currentVal));
+  }, [currentVal]);
+
   let count = currentVal.length;
   let countNoun = "tasks";
   const [filter, setFilter] = useState("All");
