@@ -43,16 +43,13 @@ function App() {
     setValues([...currentVal, newValue]);
     count++;
   }
-  const values = [
-    { id: "todo-0", name: "Eat", isChecked: true },
-    { id: "todo-1", name: "Sleep", isChecked: false },
-    { id: "todo-2", name: "Repeat", isChecked: false },
-  ];
+  const values = [];
 
   const [currentVal, setValues] = useState(values);
   let count = currentVal.length;
   let countNoun = "tasks";
   const [filter, setFilter] = useState("All");
+
   const FILTER_MAP = {
     All: () => true,
     Active: (task) => !task.isChecked,
@@ -67,11 +64,17 @@ function App() {
       setFilter={setFilter}
     />
   ));
+
   const filteredEls = currentVal.filter(FILTER_MAP[filter]);
   count = filteredEls.length;
   if (count == 1) {
     countNoun = "task";
   }
+  let empty = false;
+  if (count == 0) {
+    empty = true;
+  }
+
   const listHeadingRef = useRef(null);
   const prevTaskLength = usePrevious(count);
   useEffect(() => {
@@ -79,13 +82,20 @@ function App() {
       listHeadingRef.current.focus();
     }
   }, [count, prevTaskLength]);
+
   return (
     <div className="todoapp stack-la  rge">
       <h1>TodoMatic</h1>
       <Form id="new-todo-input" type="text" addTask={addTask} />
       <div className="filters btn-group stack-exception">{filterList}</div>
       <h2 id="list-heading" tabIndex="-1" ref={listHeadingRef}>
-        {count} {countNoun} remaining
+        {!empty ? (
+          <>
+            {count} {countNoun} remaining
+          </>
+        ) : (
+          <>No tasks remaining</>
+        )}
       </h2>
 
       <ul
