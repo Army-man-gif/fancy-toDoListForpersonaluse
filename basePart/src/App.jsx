@@ -66,7 +66,7 @@ function App() {
 
   useEffect(() => {
     if (showConfetti) {
-      const timer = setTimeout(() => setShowConfetti(false), 4000); // confetti for 3 seconds
+      const timer = setTimeout(() => setShowConfetti(false), 3000); // confetti for 3 seconds
       return () => clearTimeout(timer);
     }
   }, [showConfetti]);
@@ -140,22 +140,12 @@ function App() {
     <div className="todoapp stack-la  rge">
       <h1>TodoMatic</h1>
       {showConfetti && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            pointerEvents: "none",
-            zIndex: 9999, // Make sure it sits on top
-          }}
-        >
+        <div id="confetti">
           <Confetti
             width={window.innerWidth}
             height={window.innerHeight}
             numberOfPieces={800}
-            gravity={0.85}
+            gravity={0.95}
           />
         </div>
       )}
