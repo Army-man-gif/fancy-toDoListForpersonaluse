@@ -5,7 +5,12 @@ import Task from "./Task.jsx";
 import { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
-
+import {
+  getData,
+  addData,
+  cleanAll,
+  updateDataCall,
+} from "./testingDatabase.js";
 function App() {
   // Setting up the data saving logic and data storage logic
   const [currentVal, setValues] = useState(() => {

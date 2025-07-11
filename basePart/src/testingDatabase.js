@@ -28,15 +28,14 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-
 const db = getFirestore(app);
 
-export async function updateData(id, newData) {
-  const docRef = doc(db, "test", id);
+export async function updateData(id, newData, name) {
+  const docRef = doc(db, name, id);
   await updateDoc(docRef, newData);
 }
-export async function updateDataCall() {
-  const fetch = await getDocs(collection(db, "test"));
+export async function updateDataCall(name) {
+  const fetch = await getDocs(collection(db, name));
   fetch.forEach((doc) => {
     if (doc.data().age === 30) {
       updateData(doc.id, { name: "Changed again" });
@@ -44,17 +43,17 @@ export async function updateDataCall() {
   });
   await updateData(doc.id, { age: 35 });
 }
-export async function cleanAll() {
-  const fetch = await getDocs(collection(db, "test"));
+export async function cleanAll(name) {
+  const fetch = await getDocs(collection(db, name));
   fetch.forEach((doc) => {
     clean(doc.id);
   });
 }
-export async function clean(id) {
-  await deleteDoc(doc(db, "test", id));
+export async function clean(name, id) {
+  await deleteDoc(doc(db, name, id));
 }
-export async function getData() {
-  const fetch = await getDocs(collection(db, "test"));
+export async function getData(name) {
+  const fetch = await getDocs(collection(db, name));
   const data = [];
   fetch.forEach((doc) => {
     if (doc.data().age === 54) {
@@ -64,19 +63,8 @@ export async function getData() {
     }
   });
 }
-export async function addData() {
-  await addDoc(collection(db, "test"), {
-    name: "Alice",
-    age: 30,
-  });
-  await addDoc(collection(db, "test"), {
-    name: "Alice",
-    age: 45,
-  });
-  await addDoc(collection(db, "test"), {
-    name: "Alice",
-    age: 54,
-  });
+export async function addData(name, data) {
+  await addDoc(collection(db, name), data);
 }
 /*
 getData().catch((error) => console.error("Error fetching data:", error));
