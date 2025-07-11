@@ -32,6 +32,14 @@ function App() {
     async function updateFireStore() {
       const currentTasks = await getData(title);
       const currentTasksIds = currentTasks.map((task) => task.id);
+      currentVal.forEach((task, taskIndex) => {
+        if (currentTasksIds.includes(task.id)) {
+          const matchedTask = currentTasks.find((t) => t.id === task.id);
+          if (matchedTask && matchedTask.name == task.name) {
+            console.log("found");
+          }
+        }
+      });
     }
   }, [currentVal]);
 

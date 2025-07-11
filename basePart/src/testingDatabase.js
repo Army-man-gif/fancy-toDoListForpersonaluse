@@ -3,6 +3,7 @@ import {
   collection,
   getDocs,
   addDoc,
+  setDoc,
   deleteDoc,
   updateDoc,
   doc,
@@ -52,16 +53,18 @@ export async function cleanAll(name) {
 export async function clean(name, id) {
   await deleteDoc(doc(db, name, id));
 }
-export async function getData(name) {
-  const fetch = await getDocs(collection(db, name));
+export async function getData(name, id) {
+  const docRef = doc(db, name, id);
+  const fetch = await getDoc(docRef);
   const data = [];
   fetch.forEach((doc) => {
     data.push({ id: doc.id, ...doc.data() });
   });
   return data;
 }
-export async function addData(name, data) {
-  await addDoc(collection(db, name), data);
+export async function addData(name, id, data) {
+  const docRef = doc(db, name, id);
+  await setDoc(docRef, data);
 }
 /*
 getData().catch((error) => console.error("Error fetching data:", error));
