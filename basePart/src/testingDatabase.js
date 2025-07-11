@@ -58,6 +58,7 @@ export async function getData(name) {
   fetch.forEach((doc) => {
     data.push({ id: doc.id, ...doc.data() });
   });
+  return data;
 }
 export async function addData(name, data) {
   await addDoc(collection(db, name), data);

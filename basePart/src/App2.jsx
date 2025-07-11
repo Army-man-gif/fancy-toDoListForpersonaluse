@@ -12,11 +12,21 @@ import {
   updateDataCall,
 } from "./testingDatabase.js";
 function App() {
+  const title = prompt("Enter your name");
   // Setting up the data saving logic and data storage logic
-  const [currentVal, setValues] = useState(() => {
-    const savedTasks = localStorage.getItem("Tasks");
-    return savedTasks ? JSON.parse(savedTasks) : [];
-  });
+  const [currentVal, setValues] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const savedTasks = getData(title);
+      if (savedTasks) {
+        setValues(savedTasks);
+      } else {
+        setValues([]);
+      }
+    }
+    fetchData().catch((error) => console.error("Failed to fetch data", error));
+  }, [title]);
 
   useEffect(() => {
     localStorage.setItem("Tasks", JSON.stringify(currentVal));
