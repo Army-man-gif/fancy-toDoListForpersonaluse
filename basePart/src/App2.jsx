@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const savedTasks = getData(title);
+      const savedTasks = await getData(title);
       if (savedTasks) {
         setValues(savedTasks);
       } else {
@@ -29,7 +29,10 @@ function App() {
   }, [title]);
 
   useEffect(() => {
-    localStorage.setItem("Tasks", JSON.stringify(currentVal));
+    async function updateFireStore() {
+      const currentTasks = await getData(title);
+      const currentTasksIds = currentTasks.map((task) => task.id);
+    }
   }, [currentVal]);
 
   // Clearing storage logic
