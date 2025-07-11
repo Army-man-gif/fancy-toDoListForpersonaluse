@@ -19,8 +19,8 @@ function Database() {
     await updateDoc(docRef, newData);
   }
   async function updateDataCall() {
-    const querySnapshot = await getDocs(collection(db, "test"));
-    querySnapshot.forEach((doc) => {
+    const fetch = await getDocs(collection(db, "test"));
+    fetch.forEach((doc) => {
       if (doc.data().age === 30) {
         updateData(doc.id, { name: "Changed again" });
       }
@@ -28,8 +28,8 @@ function Database() {
     await updateData(doc.id, { age: 35 });
   }
   async function cleanAll() {
-    const querySnapshot = await getDocs(collection(db, "test"));
-    querySnapshot.forEach((doc) => {
+    const fetch = await getDocs(collection(db, "test"));
+    fetch.forEach((doc) => {
       clean(doc.id);
     });
   }
@@ -37,9 +37,9 @@ function Database() {
     await deleteDoc(doc(db, "test", id));
   }
   async function getData() {
-    const querySnapshot = await getDocs(collection(db, "test"));
+    const fetch = await getDocs(collection(db, "test"));
     const data = [];
-    querySnapshot.forEach((doc) => {
+    fetch.forEach((doc) => {
       if (doc.data().age === 54) {
         clean(doc.id);
       } else {
