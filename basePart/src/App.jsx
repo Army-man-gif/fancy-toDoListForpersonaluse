@@ -7,7 +7,17 @@ import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 
 function App() {
-  const [showConfetti, setShowConfetti] = useState(false);
+  // Setting up the data saving logic and data storage logic
+  const [currentVal, setValues] = useState(() => {
+    const savedTasks = localStorage.getItem("Tasks");
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("Tasks", JSON.stringify(currentVal));
+  }, [currentVal]);
+
+  // Clearing storage logic
   const [storageCleared, setStorageCleared] = useState(false);
   function handleClearStorage() {
     const admin = prompt("Enter secret admin password");
@@ -29,6 +39,7 @@ function App() {
     }
   }, [storageCleared]);
 
+  // Edit tasks
   function editTask(id, newName) {
     const editedTasks = currentVal.map((task) => {
       if (id === task.id) {
@@ -39,11 +50,26 @@ function App() {
     setValues(editedTasks);
   }
 
+  // Delete tasks
   function deleteTask(id) {
     const remainingTasks = currentVal.filter((task) => id !== task.id);
     count--;
     setValues(remainingTasks);
   }
+
+  // Add tasks
+  function addTask(name) {
+    if (name != "") {
+      const newValue = { id: `todo-${nanoid()}`, name: name, isChecked: false };
+      setValues([...currentVal, newValue]);
+      count++;
+    } else {
+      alert("You must enter a task");
+    }
+  }
+  // Tasks completed logic
+  const [showConfetti, setShowConfetti] = useState(false);
+
   function toggleTaskCompleted(id) {
     let confetti = true;
     const updatedTasks = currentVal.map((task) => {
@@ -70,24 +96,6 @@ function App() {
       return () => clearTimeout(timer);
     }
   }, [showConfetti]);
-
-  function addTask(name) {
-    if (name != "") {
-      const newValue = { id: `todo-${nanoid()}`, name: name, isChecked: false };
-      setValues([...currentVal, newValue]);
-      count++;
-    } else {
-      alert("You must enter a task");
-    }
-  }
-  const [currentVal, setValues] = useState(() => {
-    const savedTasks = localStorage.getItem("Tasks");
-    return savedTasks ? JSON.parse(savedTasks) : [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem("Tasks", JSON.stringify(currentVal));
-  }, [currentVal]);
 
   let count = currentVal.length;
   let countNoun = "tasks";
