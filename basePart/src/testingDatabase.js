@@ -56,11 +56,7 @@ export async function getData(name) {
   const fetch = await getDocs(collection(db, name));
   const data = [];
   fetch.forEach((doc) => {
-    if (doc.data().age === 54) {
-      clean(doc.id);
-    } else {
-      data.push({ id: doc.id, ...doc.data() });
-    }
+    data.push({ id: doc.id, ...doc.data() });
   });
 }
 export async function addData(name, data) {
