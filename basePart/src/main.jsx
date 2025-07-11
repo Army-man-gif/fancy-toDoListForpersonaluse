@@ -4,6 +4,6 @@ import Database from "./testingDatabse.jsx";
 import App from "./App.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <Database />
   </StrictMode>,
 );
