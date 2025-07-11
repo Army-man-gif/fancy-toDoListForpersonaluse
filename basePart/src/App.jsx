@@ -97,10 +97,13 @@ function App() {
     }
   }, [showConfetti]);
 
+  // App filtering tasks logic
+
   let count = currentVal.length;
   let countNoun = "tasks";
-  const [filter, setFilter] = useState("All");
 
+  // Set up the different filters
+  const [filter, setFilter] = useState("All");
   const FILTER_MAP = {
     All: () => true,
     Active: (task) => !task.isChecked,
@@ -108,6 +111,8 @@ function App() {
     Clear_Storage: () => true,
   };
   const FILTER_NAMES = Object.keys(FILTER_MAP);
+
+  // Making the filter buttons
   const filterList = FILTER_NAMES.map((name) => (
     <Buttons
       key={name}
@@ -119,7 +124,10 @@ function App() {
     />
   ));
 
+  // Filter tasks based on chosen filter
   const filteredEls = currentVal.filter(FILTER_MAP[filter]);
+
+  // Recalculate number of tasks and adjust the naming conventions based on it
   count = filteredEls.length;
   if (count == 1) {
     countNoun = "task";
@@ -129,6 +137,10 @@ function App() {
     empty = true;
   }
 
+  /* 
+  Simple refocus logic. Just refocus the input field 
+  when the user clicks on the task list
+  */
   function usePrevious(value) {
     const ref = useRef();
     useEffect(() => {
@@ -144,6 +156,7 @@ function App() {
     }
   }, [count, prevTaskLength]);
 
+  // Renders everything using all the logic functions above and in other files
   return (
     <div className="todoapp stack-la  rge">
       <h1>TodoMatic</h1>
