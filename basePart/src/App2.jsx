@@ -49,6 +49,7 @@ function App() {
         }
       });
     }
+    updateFireStore();
   }, [currentVal]);
 
   // Clearing storage logic
