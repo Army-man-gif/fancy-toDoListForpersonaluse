@@ -54,11 +54,13 @@ function App() {
           });
         }
       }
+      alert("Synced data");
       for (const task of currentTasks) {
         if (!localTasksIds.includes(task.id)) {
           await clean(title, task.id);
         }
       }
+      alert("Synced data");
     }
     const waiter = setTimeout(() => {
       updateFireStore().catch(console.error);
