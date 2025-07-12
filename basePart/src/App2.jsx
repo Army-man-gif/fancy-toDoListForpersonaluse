@@ -60,7 +60,7 @@ function App() {
     return () => {
       clearTimeout(waiter);
     };
-  }, [currentVal]);
+  }, [currentVal, title]);
 
   // Clearing storage logic
   const [storageCleared, setStorageCleared] = useState(false);
