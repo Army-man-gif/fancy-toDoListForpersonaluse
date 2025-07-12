@@ -9,6 +9,7 @@ import {
   getData,
   addData,
   cleanAll,
+  updateData,
   updateDataCall,
 } from "./testingDatabase.js";
 function App() {
@@ -32,11 +33,17 @@ function App() {
     async function updateFireStore() {
       const currentTasks = await getData(title);
       const currentTasksIds = currentTasks.map((task) => task.id);
-      currentVal.forEach((task, taskIndex) => {
+      currentVal.forEach((task) => {
         if (currentTasksIds.includes(task.id)) {
           const matchedTask = currentTasks.find((t) => t.id === task.id);
-          if (matchedTask && matchedTask.name == task.name) {
-            console.log("found");
+          if (
+            matchedTask &&
+            (matchedTask.name == task.name) |
+              (matchedTask.isChecked == task.isChecked)
+          ) {
+            if (matchedTask.name == task.name) {
+              console.log("");
+            }
           }
         }
       });
