@@ -16,6 +16,7 @@ function App() {
   // Setting up the data saving logic and data storage logic
   const [currentVal, setValues] = useState([]);
   const [title, setTitle] = useState(() => prompt("Enter your name"));
+  const [syncStatus, setSyncStatus] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -59,10 +60,13 @@ function App() {
           await clean(title, task.id);
         }
       }
-      alert("Synced data");
+      setSyncStatus(true);
     }
     const waiter = setTimeout(() => {
-      updateFireStore().catch(console.error);
+      updateFireStore().catch((error) => {
+        console.log("Error " + error);
+        setSyncStatus(false);
+      });
     }, 300);
     return () => {
       clearTimeout(waiter);
@@ -82,7 +86,7 @@ function App() {
         setStorageCleared(true);
       } catch (error) {
         console.error("Failed to clear Firestore:", error);
-        alert("Failed to clear database storage");
+        setSyncStatus(false);
       }
     }
   }
@@ -90,7 +94,7 @@ function App() {
   useEffect(() => {
     if (storageCleared) {
       setTimeout(() => {
-        alert("Database storage cleared");
+        setSyncStatus(true);
         setStorageCleared(false);
       }, 300);
     }
@@ -212,11 +216,16 @@ function App() {
       listHeadingRef.current.focus();
     }
   }, [count, prevTaskLength]);
-
+  function viewStatus() {
+    alert("Synced: " + syncStatus);
+  }
   // Renders everything using all the logic functions above and in other files
   return (
     <div className="todoapp stack-la  rge">
-      <h1>TodoMatic</h1>
+      <h1>Personal To Do list</h1>
+      <button type="button" onClick={viewStatus}>
+        Click to view sync status
+      </button>
       {showConfetti && (
         <div id="confetti">
           <Confetti
