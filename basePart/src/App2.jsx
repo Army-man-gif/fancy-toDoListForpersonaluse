@@ -37,12 +37,13 @@ function App() {
         if (currentTasksIds.includes(task.id)) {
           const matchedTask = currentTasks.find((t) => t.id === task.id);
           if (
-            matchedTask &&
-            (matchedTask.name == task.name) |
-              (matchedTask.isChecked == task.isChecked)
+            (matchedTask && matchedTask.name != task.name) ||
+            matchedTask.isChecked != task.isChecked
           ) {
-            if (matchedTask.name == task.name) {
-              console.log("");
+            if (matchedTask.name != task.name) {
+              updateData(task.id, { name: task.name }, title);
+            } else if (matchedTask.isChecked != task.isChecked) {
+              updateData(task.id, { isChecked: task.isChecked }, title);
             }
           }
         }
