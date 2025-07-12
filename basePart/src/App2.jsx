@@ -63,7 +63,7 @@ function App() {
     }
     const waiter = setTimeout(() => {
       updateFireStore().catch(console.error);
-    }, 2000);
+    }, 300);
     return () => {
       clearTimeout(waiter);
     };
@@ -92,7 +92,7 @@ function App() {
       setTimeout(() => {
         alert("Database storage cleared");
         setStorageCleared(false);
-      }, 500);
+      }, 300);
     }
   }, [storageCleared]);
 
