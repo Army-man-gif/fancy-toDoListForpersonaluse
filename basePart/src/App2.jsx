@@ -5,7 +5,13 @@ import Task from "./Task.jsx";
 import { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
-import { getData, addData, clean, updateData } from "./testingDatabase.js";
+import {
+  getData,
+  addData,
+  clean,
+  updateData,
+  cleanAll,
+} from "./testingDatabase.js";
 function App() {
   // Setting up the data saving logic and data storage logic
   const [currentVal, setValues] = useState([]);
@@ -28,7 +34,7 @@ function App() {
       const currentTasks = await getData(title);
       const currentTasksIds = currentTasks.map((task) => task.id);
       const localTasksIds = currentVal.map((task) => task.id);
-      currentVal.forEach((task) => {
+      for (const task of currentVal) {
         if (currentTasksIds.includes(task.id)) {
           const matchedTask = currentTasks.find((t) => t.id === task.id);
           if (
@@ -36,26 +42,26 @@ function App() {
             matchedTask.isChecked != task.isChecked
           ) {
             if (matchedTask.name != task.name) {
-              updateData(task.id, { name: task.name }, title);
+              await updateData(task.id, { name: task.name }, title);
             } else if (matchedTask.isChecked != task.isChecked) {
-              updateData(task.id, { isChecked: task.isChecked }, title);
+              await updateData(task.id, { isChecked: task.isChecked }, title);
             }
           }
         } else {
-          addData(title, task.id, {
+          await addData(title, task.id, {
             name: task.name,
             isChecked: task.isChecked,
           });
         }
-      });
-      currentTasks.forEach((task) => {
+      }
+      for (const task of currentTasks) {
         if (!localTasksIds.includes(task.id)) {
-          clean(task.id, title);
+          await clean(title, task.id);
         }
-      });
+      }
     }
     const waiter = setTimeout(() => {
-      updateFireStore();
+      updateFireStore().catch(console.error);
     }, 2000);
     return () => {
       clearTimeout(waiter);
@@ -64,21 +70,26 @@ function App() {
 
   // Clearing storage logic
   const [storageCleared, setStorageCleared] = useState(false);
-  function handleClearStorage() {
+  async function handleClearStorage() {
     const admin = prompt("Enter secret admin password");
     if (admin !== "1234") {
       alert("You don't have permission to clear the local storage");
     } else {
-      localStorage.clear();
-      setValues([]);
-      setStorageCleared(true);
+      try {
+        await cleanAll(title);
+        setValues([]);
+        setStorageCleared(true);
+      } catch (error) {
+        console.error("Failed to clear Firestore:", error);
+        alert("Failed to clear database storage");
+      }
     }
   }
 
   useEffect(() => {
     if (storageCleared) {
       setTimeout(() => {
-        alert("Local storage cleared");
+        alert("Database storage cleared");
         setStorageCleared(false);
       }, 500);
     }
