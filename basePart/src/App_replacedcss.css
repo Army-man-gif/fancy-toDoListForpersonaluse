@@ -123,6 +123,11 @@ body {
   border-color: #bd2130;
   color: #fff;
 }
+.btn__specific {
+  background-color: #640ec5;
+  border-color: #7f5ebd;
+  color: #fff;
+}
 .btn__filter {
   border-color: lightgrey;
 }

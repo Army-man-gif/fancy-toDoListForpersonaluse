@@ -223,7 +223,7 @@ function App() {
   return (
     <div className="todoapp stack-la  rge">
       <h1>Personal To Do list</h1>
-      <button type="button" onClick={viewStatus}>
+      <button type="button" onClick={viewStatus} className="btn btn__specific">
         Click to view sync status
       </button>
       {showConfetti && (
