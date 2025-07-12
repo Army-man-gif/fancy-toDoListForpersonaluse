@@ -2,7 +2,6 @@ import {
   getFirestore,
   collection,
   getDocs,
-  getDoc,
   setDoc,
   deleteDoc,
   updateDoc,
@@ -35,27 +34,20 @@ export async function updateData(id, newData, name) {
   const docRef = doc(db, name, id);
   await updateDoc(docRef, newData);
 }
-export async function updateDataCall(name) {
-  const fetch = await getDocs(collection(db, name));
-  fetch.forEach((doc) => {
-    if (doc.data().age === 30) {
-      updateData(doc.id, { name: "Changed again" });
-    }
-  });
-  await updateData(doc.id, { age: 35 });
-}
 export async function cleanAll(name) {
-  const fetch = await getDocs(collection(db, name));
-  fetch.forEach((doc) => {
-    clean(doc.id);
-  });
+  try {
+    const fetch = await getDocs(collection(db, name));
+    await Promise.all(fetch.docs.map((doc) => deleteDoc(doc.ref)));
+  } catch (error) {
+    console.error("Error cleaning all documents:", error);
+    throw error;
+  }
 }
 export async function clean(name, id) {
   await deleteDoc(doc(db, name, id));
 }
-export async function getData(name, id) {
-  const docRef = doc(db, name, id);
-  const fetch = await getDoc(docRef);
+export async function getData(name) {
+  const fetch = await getDocs(collection(db, name));
   const data = [];
   fetch.forEach((doc) => {
     data.push({ id: doc.id, ...doc.data() });
