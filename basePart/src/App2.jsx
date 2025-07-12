@@ -7,9 +7,9 @@ import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 import { getData, addData, clean, updateData } from "./testingDatabase.js";
 function App() {
-  const title = prompt("Enter your name");
   // Setting up the data saving logic and data storage logic
   const [currentVal, setValues] = useState([]);
+  const [title, setTitle] = useState(() => prompt("Enter your name"));
 
   useEffect(() => {
     async function fetchData() {
