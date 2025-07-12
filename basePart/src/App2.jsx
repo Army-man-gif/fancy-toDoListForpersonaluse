@@ -5,13 +5,7 @@ import Task from "./Task.jsx";
 import { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
-import {
-  getData,
-  addData,
-  cleanAll,
-  updateData,
-  updateDataCall,
-} from "./testingDatabase.js";
+import { getData, addData, clean, updateData } from "./testingDatabase.js";
 function App() {
   const title = prompt("Enter your name");
   // Setting up the data saving logic and data storage logic
@@ -33,6 +27,7 @@ function App() {
     async function updateFireStore() {
       const currentTasks = await getData(title);
       const currentTasksIds = currentTasks.map((task) => task.id);
+      const localTasksIds = currentVal.map((task) => task.id);
       currentVal.forEach((task) => {
         if (currentTasksIds.includes(task.id)) {
           const matchedTask = currentTasks.find((t) => t.id === task.id);
@@ -46,10 +41,25 @@ function App() {
               updateData(task.id, { isChecked: task.isChecked }, title);
             }
           }
+        } else {
+          addData(title, task.id, {
+            name: task.name,
+            isChecked: task.isChecked,
+          });
+        }
+      });
+      currentTasks.forEach((task) => {
+        if (!localTasksIds.includes(task.id)) {
+          clean(task.id, title);
         }
       });
     }
-    updateFireStore();
+    const waiter = setTimeout(() => {
+      updateFireStore();
+    }, 2000);
+    return () => {
+      clearTimeout(waiter);
+    };
   }, [currentVal]);
 
   // Clearing storage logic
