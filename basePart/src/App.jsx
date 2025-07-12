@@ -159,7 +159,7 @@ function App() {
   // Renders everything using all the logic functions above and in other files
   return (
     <div className="todoapp stack-la  rge">
-      <h1>TodoMatic</h1>
+      <h1>Personal To Do List</h1>
       {showConfetti && (
         <div id="confetti">
           <Confetti
