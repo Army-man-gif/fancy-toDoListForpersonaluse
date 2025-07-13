@@ -34,22 +34,17 @@ function App() {
       if (currentTasksIds.includes(task.id)) {
         const matchedTask = currentTasks.find((t) => t.id === task.id);
         if (
-          (matchedTask && matchedTask.name != task.name) ||
+          matchedTask.name != task.name ||
           matchedTask.isChecked != task.isChecked
         ) {
-          if (
-            matchedTask.name !== task.name ||
-            matchedTask.isChecked !== task.isChecked
-          ) {
-            await updateData(
-              task.id,
-              {
-                name: task.name,
-                isChecked: task.isChecked,
-              },
-              title,
-            );
-          }
+          await updateData(
+            task.id,
+            {
+              name: task.name,
+              isChecked: task.isChecked,
+            },
+            title,
+          );
         }
       } else {
         await addData(title, task.id, {
