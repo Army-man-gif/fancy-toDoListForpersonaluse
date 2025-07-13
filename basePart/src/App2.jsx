@@ -34,6 +34,14 @@ function App() {
       setIsDataFetched(false);
     }
   }
+  useEffect(() => {
+    if (title) {
+      fetchData().catch((error) => {
+        console.error("Failed to fetch data", error);
+        setSyncStatus(false);
+      });
+    }
+  }, [title]);
   async function updateFireStore() {
     const currentTasks = await getData(title);
     const currentTasksIds = currentTasks.map((task) => task.id);
@@ -68,14 +76,7 @@ function App() {
     }
     setSyncStatus(true);
   }
-  useEffect(() => {
-    if (title) {
-      fetchData().catch((error) => {
-        console.error("Failed to fetch data", error);
-        setSyncStatus(false);
-      });
-    }
-  }, [title]);
+
   useEffect(() => {
     if (!isDataFetched) return;
 
