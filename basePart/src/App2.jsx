@@ -246,6 +246,10 @@ Below here is identical
       setValues(JSON.parse(pulledTasks));
     }
   }
+  function overrideLocalStorage() {
+    localStorage.setItem("Tasks", JSON.stringify(currentVal));
+    alert("Local storage overridden");
+  }
   // Renders everything using all the logic functions above and in other files
   return (
     <div className="todoapp stack-la  rge">
@@ -259,7 +263,11 @@ Below here is identical
       <button type="button" onClick={pull} className="btn btn__change">
         Pull from local storage to sync
       </button>
-      <button type="button" className="btn btn__change">
+      <button
+        type="button"
+        onClick={overrideLocalStorage}
+        className="btn btn__change"
+      >
         Pull from database and override local storage
       </button>
       {showConfetti && (
