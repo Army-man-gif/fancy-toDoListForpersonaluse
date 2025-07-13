@@ -259,6 +259,9 @@ Below here is identical
       <button type="button" onClick={pull} className="btn btn__change">
         Pull from local storage to sync
       </button>
+      <button type="button" className="btn btn__change">
+        Pull from database and override local storage
+      </button>
       {showConfetti && (
         <div id="confetti">
           <Confetti
