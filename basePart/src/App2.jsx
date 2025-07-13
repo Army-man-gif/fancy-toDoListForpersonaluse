@@ -16,7 +16,7 @@ function App() {
   // Setting up the data saving logic and data storage logic
   const [title, setTitle] = useState(() => prompt("Enter your name"));
   const [syncStatus, setSyncStatus] = useState(false);
-
+  const [count, setCount] = useState(0);
   const [currentVal, setValues] = useState([]);
   useEffect(() => {
     async function fetchData() {
@@ -42,10 +42,18 @@ function App() {
             (matchedTask && matchedTask.name != task.name) ||
             matchedTask.isChecked != task.isChecked
           ) {
-            if (matchedTask.name != task.name) {
-              await updateData(task.id, { name: task.name }, title);
-            } else if (matchedTask.isChecked != task.isChecked) {
-              await updateData(task.id, { isChecked: task.isChecked }, title);
+            if (
+              matchedTask.name !== task.name ||
+              matchedTask.isChecked !== task.isChecked
+            ) {
+              await updateData(
+                task.id,
+                {
+                  name: task.name,
+                  isChecked: task.isChecked,
+                },
+                title,
+              );
             }
           }
         } else {
@@ -119,7 +127,6 @@ Below here is identical
   // Delete tasks
   function deleteTask(id) {
     const remainingTasks = currentVal.filter((task) => id !== task.id);
-    count--;
     setValues(remainingTasks);
   }
 
@@ -128,7 +135,6 @@ Below here is identical
     if (name != "") {
       const newValue = { id: `todo-${nanoid()}`, name: name, isChecked: false };
       setValues([...currentVal, newValue]);
-      count++;
     } else {
       alert("You must enter a task");
     }
@@ -165,7 +171,6 @@ Below here is identical
 
   // App filtering tasks logic
 
-  let count = currentVal.length;
   let countNoun = "tasks";
 
   // Set up the different filters
@@ -189,12 +194,13 @@ Below here is identical
       handleClearStorage={handleClearStorage}
     />
   ));
-
-  // Filter tasks based on chosen filter
   const filteredEls = currentVal.filter(FILTER_MAP[filter]);
+  useEffect(() => {
+    setCount(filteredEls.length);
+  }, [filteredEls.length]);
+  // Filter tasks based on chosen filter
 
   // Recalculate number of tasks and adjust the naming conventions based on it
-  count = filteredEls.length;
   if (count == 1) {
     countNoun = "task";
   }

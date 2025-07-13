@@ -1,5 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
-//returned to normal
-createRoot(document.getElementById("root")).render(<App />);
+import App2 from "./App2.jsx";
+
+//createRoot(document.getElementById("root")).render(<App />);
+createRoot(document.getElementById("root")).render(<App2 />);
