@@ -9,8 +9,8 @@ function Task({
   editTask,
 }) {
   const editFieldRef = useRef(null);
-  const editButtonRef = useRef(null);
-
+  const DeleteButton = useRef(false);
+  const editButtonRef = useRef(false);
   const [isEditing, setEditing] = useState(false);
   const [newName, setNewName] = useState(name);
 
@@ -71,19 +71,33 @@ function Task({
           className="btn"
           onClick={() => setEditing(true)}
           ref={editButtonRef}
+          disabled={isChecked}
         >
           Edit <span className="visually-hidden">{newName}</span>
         </button>
         <button
+          ref={DeleteButton}
           type="button"
           className="btn btn__danger"
           onClick={() => deleteTask(id)}
+          disabled={isChecked}
         >
           Delete <span className="visually-hidden">{newName}</span>
         </button>
       </div>
     </>
   );
+
+  useEffect(() => {
+    if (DeleteButton.current && DeleteButton.current.disabled) {
+      DeleteButton.current.className = "btn__disabled";
+    }
+
+    if (editButtonRef.current && editButtonRef.current.disabled) {
+      editButtonRef.current.className = "btn__disabled";
+    }
+  }, [isChecked]);
+
   const wasEditing = usePrevious(isEditing);
   useEffect(() => {
     if (!wasEditing && isEditing) {
@@ -92,6 +106,7 @@ function Task({
       editButtonRef.current.focus();
     }
   }, [wasEditing, isEditing]);
+
   return <>{isEditing ? editTemplate : viewTemplate}</>;
 }
 

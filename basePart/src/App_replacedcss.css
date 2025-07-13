@@ -123,6 +123,12 @@ body {
   border-color: #bd2130;
   color: #fff;
 }
+.btn__disabled {
+  background-color: rgb(194, 180, 180);
+  color: rgb(129, 124, 124);
+  padding: 0.8rem 1rem 0.7rem;
+  text-transform: capitalize;
+}
 .btn__specific {
   background-color: #640ec5;
   border-color: #7f5ebd;
@@ -131,7 +137,7 @@ body {
 .btn__change {
   background-color: #1ad05a;
   border-color: #8fd4dc;
-  color: #1f1d1d;
+  color: #cbbdbd;
 }
 .btn__filter {
   border-color: lightgrey;

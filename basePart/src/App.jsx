@@ -38,7 +38,11 @@ function App() {
       }, 500);
     }
   }, [storageCleared]);
+  /*
+  ---------------------------------------------------------------------------
+  Below here is identical
 
+  */
   // Edit tasks
   function editTask(id, newName) {
     const editedTasks = currentVal.map((task) => {
@@ -155,11 +159,19 @@ function App() {
       listHeadingRef.current.focus();
     }
   }, [count, prevTaskLength]);
-
+  function viewStatus() {
+    alert("Synced: " + syncStatus);
+  }
   // Renders everything using all the logic functions above and in other files
   return (
     <div className="todoapp stack-la  rge">
-      <h1>Personal To Do List</h1>
+      <h1>Personal To Do list</h1>
+      <button type="button" onClick={viewStatus} className="btn btn__specific">
+        Click to view sync status
+      </button>
+      <button type="button" className="btn btn__change">
+        Click to change storage method
+      </button>
       {showConfetti && (
         <div id="confetti">
           <Confetti
