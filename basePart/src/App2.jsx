@@ -14,10 +14,10 @@ import {
 } from "./testingDatabase.js";
 function App() {
   // Setting up the data saving logic and data storage logic
-  const [currentVal, setValues] = useState([]);
   const [title, setTitle] = useState(() => prompt("Enter your name"));
   const [syncStatus, setSyncStatus] = useState(false);
 
+  const [currentVal, setValues] = useState([]);
   useEffect(() => {
     async function fetchData() {
       const savedTasks = await getData(title);
@@ -100,6 +100,11 @@ function App() {
     }
   }, [storageCleared]);
 
+  /*
+---------------------------------------------------------------------------
+Below here is identical
+
+*/
   // Edit tasks
   function editTask(id, newName) {
     const editedTasks = currentVal.map((task) => {
@@ -225,6 +230,9 @@ function App() {
       <h1>Personal To Do list</h1>
       <button type="button" onClick={viewStatus} className="btn btn__specific">
         Click to view sync status
+      </button>
+      <button type="button" className="btn btn__change">
+        Click to change storage method
       </button>
       {showConfetti && (
         <div id="confetti">
