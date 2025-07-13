@@ -29,7 +29,7 @@ function App() {
       }
       setIsDataFetched(true);
     } catch (error) {
-      console.error("Failed to fetch data", err);
+      console.error("Failed to fetch data", error);
       setSyncStatus(false);
       setIsDataFetched(false);
     }
@@ -76,19 +76,13 @@ function App() {
     }
     setSyncStatus(true);
   }
-
+  function overrideLocalStorage() {
+    localStorage.setItem("Tasks", JSON.stringify(currentVal));
+  }
   useEffect(() => {
-    if (!isDataFetched) return;
-
-    const waiter = setTimeout(() => {
-      updateFireStore().catch((error) => {
-        console.log("Error " + error);
-        setSyncStatus(false);
-      });
-    }, 1000);
-    return () => {
-      clearTimeout(waiter);
-    };
+    if (isDataFetched) {
+      overrideLocalStorage();
+    }
   }, [currentVal, title, isDataFetched]);
 
   // Clearing storage logic
@@ -168,7 +162,6 @@ Below here is identical
     } else {
       setShowConfetti(false);
     }
-    console.log("Confetti triggered?", showConfetti);
     setValues(updatedTasks);
   }
 
@@ -241,34 +234,24 @@ Below here is identical
     alert("Synced: " + syncStatus);
   }
   function pull() {
-    const pulledTasks = localStorage.getItem("Tasks");
-    if (pulledTasks) {
-      setValues(JSON.parse(pulledTasks));
-    }
-  }
-  function overrideLocalStorage() {
-    localStorage.setItem("Tasks", JSON.stringify(currentVal));
-    alert("Local storage overridden");
+    if (!isDataFetched) return;
+
+    const waiter = setTimeout(() => {
+      updateFireStore().catch((error) => {
+        console.log("Error " + error);
+        setSyncStatus(false);
+      });
+    }, 1000);
+    return () => {
+      clearTimeout(waiter);
+    };
   }
   // Renders everything using all the logic functions above and in other files
   return (
     <div className="todoapp stack-la  rge">
       <h1>Personal To Do list</h1>
-      <button type="button" onClick={viewStatus} className="btn btn__specific">
-        Click to view sync status
-      </button>
-      <button type="button" className="btn btn__change">
-        Click to change storage method
-      </button>
       <button type="button" onClick={pull} className="btn btn__change">
-        Pull from local storage to sync
-      </button>
-      <button
-        type="button"
-        onClick={overrideLocalStorage}
-        className="btn btn__change"
-      >
-        Pull from database and override local storage
+        Click to sync to database
       </button>
       {showConfetti && (
         <div id="confetti">
