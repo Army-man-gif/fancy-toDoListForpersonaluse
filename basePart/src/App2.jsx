@@ -18,12 +18,20 @@ function App() {
   const [syncStatus, setSyncStatus] = useState(false);
   const [count, setCount] = useState(0);
   const [currentVal, setValues] = useState([]);
+  const [isDataFetched, setIsDataFetched] = useState(false);
   async function fetchData() {
     const savedTasks = await getData(title);
-    if (savedTasks) {
-      setValues(savedTasks);
-    } else {
-      setValues([]);
+    try {
+      if (savedTasks) {
+        setValues(savedTasks);
+      } else {
+        setValues([]);
+      }
+      setIsDataFetched(true);
+    } catch (error) {
+      console.error("Failed to fetch data", err);
+      setSyncStatus(false);
+      setIsDataFetched(false);
     }
   }
   async function updateFireStore() {
@@ -61,22 +69,26 @@ function App() {
     setSyncStatus(true);
   }
   useEffect(() => {
-    fetchData().catch((error) => {
-      console.error("Failed to fetch data", error);
-      setSyncStatus(false);
-    });
+    if (title) {
+      fetchData().catch((error) => {
+        console.error("Failed to fetch data", error);
+        setSyncStatus(false);
+      });
+    }
   }, [title]);
   useEffect(() => {
+    if (!isDataFetched) return;
+
     const waiter = setTimeout(() => {
       updateFireStore().catch((error) => {
         console.log("Error " + error);
         setSyncStatus(false);
       });
-    }, 500);
+    }, 1000);
     return () => {
       clearTimeout(waiter);
     };
-  }, [currentVal, title]);
+  }, [currentVal, title, isDataFetched]);
 
   // Clearing storage logic
   const [storageCleared, setStorageCleared] = useState(false);
@@ -227,6 +239,12 @@ Below here is identical
   function viewStatus() {
     alert("Synced: " + syncStatus);
   }
+  function pull() {
+    const pulledTasks = localStorage.getItem("Tasks");
+    if (pulledTasks) {
+      setValues(JSON.parse(pulledTasks));
+    }
+  }
   // Renders everything using all the logic functions above and in other files
   return (
     <div className="todoapp stack-la  rge">
@@ -236,6 +254,9 @@ Below here is identical
       </button>
       <button type="button" className="btn btn__change">
         Click to change storage method
+      </button>
+      <button type="button" onClick={pull} className="btn btn__change">
+        Pull from local storage to sync
       </button>
       {showConfetti && (
         <div id="confetti">
