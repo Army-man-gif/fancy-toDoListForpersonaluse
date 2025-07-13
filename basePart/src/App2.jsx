@@ -18,64 +18,66 @@ function App() {
   const [syncStatus, setSyncStatus] = useState(false);
   const [count, setCount] = useState(0);
   const [currentVal, setValues] = useState([]);
-  useEffect(() => {
-    async function fetchData() {
-      const savedTasks = await getData(title);
-      if (savedTasks) {
-        setValues(savedTasks);
-      } else {
-        setValues([]);
-      }
+  async function fetchData() {
+    const savedTasks = await getData(title);
+    if (savedTasks) {
+      setValues(savedTasks);
+    } else {
+      setValues([]);
     }
-    fetchData().catch((error) => console.error("Failed to fetch data", error));
-  }, [title]);
-
-  useEffect(() => {
-    async function updateFireStore() {
-      const currentTasks = await getData(title);
-      const currentTasksIds = currentTasks.map((task) => task.id);
-      const localTasksIds = currentVal.map((task) => task.id);
-      for (const task of currentVal) {
-        if (currentTasksIds.includes(task.id)) {
-          const matchedTask = currentTasks.find((t) => t.id === task.id);
+  }
+  async function updateFireStore() {
+    const currentTasks = await getData(title);
+    const currentTasksIds = currentTasks.map((task) => task.id);
+    const localTasksIds = currentVal.map((task) => task.id);
+    for (const task of currentVal) {
+      if (currentTasksIds.includes(task.id)) {
+        const matchedTask = currentTasks.find((t) => t.id === task.id);
+        if (
+          (matchedTask && matchedTask.name != task.name) ||
+          matchedTask.isChecked != task.isChecked
+        ) {
           if (
-            (matchedTask && matchedTask.name != task.name) ||
-            matchedTask.isChecked != task.isChecked
+            matchedTask.name !== task.name ||
+            matchedTask.isChecked !== task.isChecked
           ) {
-            if (
-              matchedTask.name !== task.name ||
-              matchedTask.isChecked !== task.isChecked
-            ) {
-              await updateData(
-                task.id,
-                {
-                  name: task.name,
-                  isChecked: task.isChecked,
-                },
-                title,
-              );
-            }
+            await updateData(
+              task.id,
+              {
+                name: task.name,
+                isChecked: task.isChecked,
+              },
+              title,
+            );
           }
-        } else {
-          await addData(title, task.id, {
-            name: task.name,
-            isChecked: task.isChecked,
-          });
         }
+      } else {
+        await addData(title, task.id, {
+          name: task.name,
+          isChecked: task.isChecked,
+        });
       }
-      for (const task of currentTasks) {
-        if (!localTasksIds.includes(task.id)) {
-          await clean(title, task.id);
-        }
-      }
-      setSyncStatus(true);
     }
+    for (const task of currentTasks) {
+      if (!localTasksIds.includes(task.id)) {
+        await clean(title, task.id);
+      }
+    }
+    setSyncStatus(true);
+  }
+  useEffect(() => {
+    fetchData().catch((error) => {
+      console.error("Failed to fetch data", error);
+      setSyncStatus(false);
+    });
+  }, [title]);
+  useEffect(() => {
     const waiter = setTimeout(() => {
       updateFireStore().catch((error) => {
         console.log("Error " + error);
         setSyncStatus(false);
       });
-    }, 300);
+    }, 500);
     return () => {
       clearTimeout(waiter);
     };
