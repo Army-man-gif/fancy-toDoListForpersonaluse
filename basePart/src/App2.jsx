@@ -15,7 +15,8 @@ import {
 function App() {
   // Setting up the data saving logic and data storage logic
   const [currentVal, setValues] = useState([]);
-  const [title, setTitle] = useState(() => prompt("Enter your name"));
+  const [title, setTitle] = useState("");
+  setTitle(prompt("Enter your name: "));
   const [syncStatus, setSyncStatus] = useState(false);
 
   useEffect(() => {
