@@ -107,7 +107,7 @@ function App() {
   let countNoun = "tasks";
 
   // Set up the different filters
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState("Active");
   const FILTER_MAP = {
     All: () => true,
     Active: (task) => !task.isChecked,
