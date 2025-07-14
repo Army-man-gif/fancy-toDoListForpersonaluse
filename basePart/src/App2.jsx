@@ -82,8 +82,8 @@ function App() {
   function detectHyperlink(element) {
     const hyperlinkExists =
       element.includes("https") || element.includes("http");
-    const indexStart = element.indexOf("http");
-    if (indexStart !== -1) {
+    if (hyperlinkExists) {
+      const indexStart = element.indexOf("http");
       const link = element.substring(indexStart);
       console.log(link);
     }
