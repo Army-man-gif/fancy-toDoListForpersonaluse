@@ -85,6 +85,7 @@ function App() {
   useEffect(() => {
     if (isDataFetched) {
       overrideLocalStorage();
+      pull();
     }
   }, [currentVal, title, isDataFetched]);
 
@@ -282,9 +283,6 @@ Below here is identical
   return (
     <div className="todoapp stack-la  rge">
       <h1>Personal To Do list</h1>
-      <button type="button" onClick={pull} className="btn btn__change">
-        Click to sync to database
-      </button>
       {showConfetti && (
         <div id="confetti">
           <Confetti
