@@ -71,7 +71,7 @@ function Task({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Link
+                {hyperlinkData.alias}
               </a>
             </>
           ) : (
