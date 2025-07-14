@@ -7,6 +7,7 @@ function Task({
   toggleTaskCompleted,
   deleteTask,
   editTask,
+  detectHyperlink,
 }) {
   const editFieldRef = useRef(null);
   const DeleteButton = useRef(false);
@@ -29,7 +30,7 @@ function Task({
   function handleChange(e) {
     setNewName(e.target.value);
   }
-
+  const hyperlinkData = detectHyperlink(newName);
   const editTemplate = (
     <form onSubmit={handleSubmit}>
       <div>
@@ -62,7 +63,20 @@ function Task({
           onChange={() => toggleTaskCompleted(id)}
         />
         <label className="todo-label" htmlFor={`view-${id}`}>
-          {newName}
+          {hyperlinkData ? (
+            <>
+              {hyperlinkData.text + " "}
+              <a
+                href={hyperlinkData.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Link
+              </a>
+            </>
+          ) : (
+            newName
+          )}
         </label>
       </div>
       <div className="btn-group">

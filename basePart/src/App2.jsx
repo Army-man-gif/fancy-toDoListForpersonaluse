@@ -79,21 +79,9 @@ function App() {
   function overrideLocalStorage() {
     localStorage.setItem("Tasks", JSON.stringify(currentVal));
   }
-  function detectHyperlink(element) {
-    const hyperlinkExists =
-      element.includes("https") || element.includes("http");
-    if (hyperlinkExists) {
-      const indexStart = element.indexOf("http");
-      const link = element.substring(indexStart);
-      console.log(link);
-    }
-  }
   useEffect(() => {
     if (isDataFetched) {
       overrideLocalStorage();
-      currentVal.forEach((val) => {
-        detectHyperlink(val.name);
-      });
     }
   }, [currentVal, title, isDataFetched]);
 
@@ -258,6 +246,18 @@ Below here is identical
       clearTimeout(waiter);
     };
   }
+  function detectHyperlink(element) {
+    const hyperlinkExists =
+      element.includes("https") || element.includes("http");
+    if (hyperlinkExists) {
+      const indexStart = element.indexOf("http");
+      const link = element.substring(indexStart);
+      const text = element.substring(0, indexStart).trim();
+      return { text, link };
+    } else {
+      return null;
+    }
+  }
   // Renders everything using all the logic functions above and in other files
   return (
     <div className="todoapp stack-la  rge">
@@ -301,6 +301,7 @@ Below here is identical
               toggleTaskCompleted={toggleTaskCompleted}
               deleteTask={deleteTask}
               editTask={editTask}
+              detectHyperlink={detectHyperlink}
             />
           </li>
         ))}
