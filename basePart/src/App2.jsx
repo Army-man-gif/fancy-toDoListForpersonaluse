@@ -253,7 +253,7 @@ Below here is identical
       const indexStart = element.indexOf("http");
       const link = element.substring(indexStart);
       const text = element.substring(0, indexStart).trim();
-      const alias = link.split("/")[2];
+      const alias = link.split("/")[2] || "link";
       return { text, link, alias };
     } else {
       return null;
