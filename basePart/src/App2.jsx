@@ -82,6 +82,7 @@ function App() {
   function detectHyperlink(element) {
     const hyperlinkExists =
       element.includes("https") || element.includes("http");
+    const indexStart = element.indexOf("http");
   }
   useEffect(() => {
     if (isDataFetched) {
