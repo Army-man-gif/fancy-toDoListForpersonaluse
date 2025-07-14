@@ -79,6 +79,10 @@ function App() {
   function overrideLocalStorage() {
     localStorage.setItem("Tasks", JSON.stringify(currentVal));
   }
+  function detectHyperlink(element) {
+    const hyperlinkExists =
+      element.includes("https") || element.includes("http");
+  }
   useEffect(() => {
     if (isDataFetched) {
       overrideLocalStorage();
