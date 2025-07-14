@@ -51,13 +51,15 @@ function App() {
         const matchedTask = currentTasks.find((t) => t.id === task.id);
         if (
           matchedTask.name != task.name ||
-          matchedTask.isChecked != task.isChecked
+          matchedTask.isChecked != task.isChecked ||
+          matchedTask.myDay != task.myDay
         ) {
           await updateData(
             task.id,
             {
               name: task.name,
               isChecked: task.isChecked,
+              myDay: task.myDay,
             },
             title,
           );
@@ -66,6 +68,7 @@ function App() {
         await addData(title, task.id, {
           name: task.name,
           isChecked: task.isChecked,
+          myDay: task.myDay,
         });
       }
     }
@@ -137,11 +140,26 @@ Below here is identical
   // Add tasks
   function addTask(name) {
     if (name != "") {
-      const newValue = { id: `todo-${nanoid()}`, name: name, isChecked: false };
+      const newValue = {
+        id: `todo-${nanoid()}`,
+        name: name,
+        isChecked: false,
+        myDay: false,
+      };
       setValues([...currentVal, newValue]);
     } else {
       alert("You must enter a task");
     }
+  }
+  // myDay logic
+  function toggleTomyDay(id) {
+    const updatedTasks = currentVal.map((task) => {
+      if (id === task.id) {
+        return { ...task, myDay: !task.myDay };
+      }
+      return task;
+    });
+    setValues(updatedTasks);
   }
   // Tasks completed logic
   const [showConfetti, setShowConfetti] = useState(false);
@@ -183,6 +201,7 @@ Below here is identical
     Active: (task) => !task.isChecked,
     Completed: (task) => task.isChecked,
     Clear_Storage: () => true,
+    MyDay: (task) => task.myDay,
   };
   const FILTER_NAMES = Object.keys(FILTER_MAP);
 
@@ -298,11 +317,13 @@ Below here is identical
             <Task
               id={task.id}
               name={task.name}
+              myDay={task.myDay}
               isChecked={task.isChecked}
               toggleTaskCompleted={toggleTaskCompleted}
               deleteTask={deleteTask}
               editTask={editTask}
               detectHyperlink={detectHyperlink}
+              toggleTomyDay={toggleTomyDay}
             />
           </li>
         ))}

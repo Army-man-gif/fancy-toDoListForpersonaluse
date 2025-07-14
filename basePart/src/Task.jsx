@@ -3,15 +3,18 @@ import { useEffect, useRef, useState } from "react";
 function Task({
   name,
   id,
+  myDay,
   isChecked,
   toggleTaskCompleted,
   deleteTask,
   editTask,
   detectHyperlink,
+  toggleTomyDay,
 }) {
   const editFieldRef = useRef(null);
   const DeleteButton = useRef(false);
   const editButtonRef = useRef(false);
+  const myDayButton = useRef(false);
   const [isEditing, setEditing] = useState(false);
   const [newName, setNewName] = useState(name);
 
@@ -98,6 +101,28 @@ function Task({
         >
           Delete <span className="visually-hidden">{newName}</span>
         </button>
+
+        {myDay ? (
+          <button
+            ref={myDayButton}
+            type="button"
+            className="btn btn__danger"
+            onClick={() => toggleTomyDay(id)}
+            disabled={isChecked}
+          >
+            Remove from myDay <span className="visually-hidden">{newName}</span>
+          </button>
+        ) : (
+          <button
+            ref={myDayButton}
+            type="button"
+            className="btn btn__danger"
+            onClick={() => toggleTomyDay(id)}
+            disabled={isChecked}
+          >
+            Add to myDay <span className="visually-hidden">{newName}</span>
+          </button>
+        )}
       </div>
     </>
   );
@@ -109,6 +134,9 @@ function Task({
 
     if (editButtonRef.current && editButtonRef.current.disabled) {
       editButtonRef.current.className = "btn__disabled";
+    }
+    if (myDayButton.current && myDayButton.current.disabled) {
+      myDayButton.current.className = "btn__disabled";
     }
   }, [isChecked]);
 
