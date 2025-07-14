@@ -83,10 +83,17 @@ function App() {
     const hyperlinkExists =
       element.includes("https") || element.includes("http");
     const indexStart = element.indexOf("http");
+    if (indexStart !== -1) {
+      const link = element.substring(indexStart);
+      console.log(link);
+    }
   }
   useEffect(() => {
     if (isDataFetched) {
       overrideLocalStorage();
+      currentVal.forEach((val) => {
+        detectHyperlink(val.name);
+      });
     }
   }, [currentVal, title, isDataFetched]);
 
