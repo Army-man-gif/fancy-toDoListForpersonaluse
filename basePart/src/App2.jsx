@@ -94,7 +94,7 @@ function App() {
   async function handleClearStorage() {
     const admin = prompt("Enter secret admin password");
     if (admin !== "1234") {
-      alert("You don't have permission to clear the local storage");
+      alert("You don't have permission to clear the cloud storage");
     } else {
       try {
         await cleanAll(title);
