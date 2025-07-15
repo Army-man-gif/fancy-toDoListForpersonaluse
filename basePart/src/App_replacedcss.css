@@ -189,7 +189,7 @@ body {
   }
 
   .btn-group > * {
-    flex: 1 1 calc((100% / 4) - 0.4rem);
+    flex: 1 1 calc((100% / 5) - 0.4rem);
     max-width: 100%;
     min-width: 120px;
   }
