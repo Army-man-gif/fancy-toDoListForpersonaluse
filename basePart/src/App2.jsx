@@ -40,6 +40,13 @@ function App() {
         console.error("Failed to fetch data", error);
         setSyncStatus(false);
       });
+    } else {
+      try {
+        pullFromLocal();
+      } catch (error) {
+        console.error("Failed to fetch data", error);
+        setSyncStatus(false);
+      }
     }
   }, [title]);
   async function updateFireStore() {
@@ -82,12 +89,20 @@ function App() {
     }
     setSyncStatus(true);
   }
+  function pullFromLocal() {
+    const pulled = localStorage.getItem("Tasks");
+    if (pulled) {
+      const parsed = JSON.parse(pulled);
+      setValues(parsed);
+    } else {
+      setValues([]);
+    }
+  }
   function overrideLocalStorage() {
     localStorage.setItem("Tasks", JSON.stringify(currentVal));
   }
   function pull() {
     if (!isDataFetched) return;
-
     const waiter = setTimeout(() => {
       updateFireStore().catch((error) => {
         console.log("Error " + error);
@@ -99,8 +114,8 @@ function App() {
     };
   }
   useEffect(() => {
-    if (isDataFetched) {
-      overrideLocalStorage();
+    overrideLocalStorage();
+    if (isDataFetched && title) {
       pull();
     }
   }, [currentVal, title, isDataFetched]);
