@@ -195,13 +195,11 @@ Below here is identical
   function toggleTaskCompleted(id) {
     let confetti = true;
     const updatedTasks = currentVal.map((task) => {
+      if (id === task.id && task.isChecked) {
+        confetti = false;
+      }
       if (id === task.id) {
-        if (task.isChecked == true) {
-          confetti = false;
-          return { ...task, isChecked: false };
-        } else {
-          return { ...task, isChecked: true };
-        }
+        return { ...task, isChecked: !task.isChecked };
       }
       return task;
     });
