@@ -170,13 +170,14 @@ body {
 }
 .btn-group {
   display: flex;
+  gap: 1.1rem;
   justify-content: space-between;
 }
 .btn-group > * {
-  flex: 1 1 49%;
+  flex: 1 1 auto;
 }
 .btn-group > * + * {
-  margin-left: 0.8rem;
+  margin-left: -1.5rem;
 }
 .label-wrapper {
   flex: 0 0 100%;
