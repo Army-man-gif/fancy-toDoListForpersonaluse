@@ -10,11 +10,14 @@ function Task({
   editTask,
   detectHyperlink,
   toggleTomyDay,
+  isStarred,
+  toggleStarred,
 }) {
   const editFieldRef = useRef(null);
   const DeleteButton = useRef(false);
   const editButtonRef = useRef(false);
   const myDayButton = useRef(false);
+  const StarredButton = useRef(false);
   const [isEditing, setEditing] = useState(false);
   const [newName, setNewName] = useState(name);
 
@@ -81,6 +84,15 @@ function Task({
             newName
           )}
         </label>
+        <button
+          type="button"
+          ref={StarredButton}
+          onClick={() => toggleStarred(id)}
+          aria-label="star-button"
+          disabled={isChecked}
+        >
+          {isStarred ? "★" : "✧"}
+        </button>
       </div>
       <div className="btn-group">
         <button
@@ -137,6 +149,19 @@ function Task({
     }
     if (myDayButton.current && myDayButton.current.disabled) {
       myDayButton.current.className = "btn__disabled";
+    }
+    if (StarredButton.current && StarredButton.current.disabled) {
+      StarredButton.current.classList.add("star__disabled");
+      StarredButton.current.classList.remove("star");
+      StarredButton.current.classList.remove("star_checked");
+    }
+    if (StarredButton.current && !StarredButton.current.disabled) {
+      StarredButton.current.classList.remove("star__disabled");
+      if (isStarred) {
+        StarredButton.current.classList.add("star_checked");
+      } else {
+        StarredButton.current.classList.add("star");
+      }
     }
   }, [isChecked]);
 

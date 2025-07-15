@@ -52,7 +52,8 @@ function App() {
         if (
           matchedTask.name != task.name ||
           matchedTask.isChecked != task.isChecked ||
-          matchedTask.myDay != task.myDay
+          matchedTask.myDay != task.myDay ||
+          matchedTask.isStarred != task.isStarred
         ) {
           await updateData(
             task.id,
@@ -60,6 +61,7 @@ function App() {
               name: task.name,
               isChecked: task.isChecked,
               myDay: task.myDay,
+              isStarred: task.isStarred,
             },
             title,
           );
@@ -69,6 +71,7 @@ function App() {
           name: task.name,
           isChecked: task.isChecked,
           myDay: task.myDay,
+          isStarred: task.isStarred,
         });
       }
     }
@@ -146,6 +149,7 @@ Below here is identical
         name: name,
         isChecked: false,
         myDay: false,
+        isStarred: false,
       };
       setValues([...currentVal, newValue]);
     } else {
@@ -157,6 +161,16 @@ Below here is identical
     const updatedTasks = currentVal.map((task) => {
       if (id === task.id) {
         return { ...task, myDay: !task.myDay };
+      }
+      return task;
+    });
+    setValues(updatedTasks);
+  }
+  // starred logic
+  function toggleStarred(id) {
+    const updatedTasks = currentVal.map((task) => {
+      if (id === task.id) {
+        return { ...task, isStarred: !task.isStarred };
       }
       return task;
     });
@@ -203,6 +217,7 @@ Below here is identical
     Completed: (task) => task.isChecked,
     Clear_Storage: () => true,
     MyDay: (task) => task.myDay,
+    importantTasks: (task) => task.isStarred,
   };
   const FILTER_NAMES = Object.keys(FILTER_MAP);
 
@@ -316,12 +331,14 @@ Below here is identical
               id={task.id}
               name={task.name}
               myDay={task.myDay}
+              isStarred={task.isStarred}
               isChecked={task.isChecked}
               toggleTaskCompleted={toggleTaskCompleted}
               deleteTask={deleteTask}
               editTask={editTask}
               detectHyperlink={detectHyperlink}
               toggleTomyDay={toggleTomyDay}
+              toggleStarred={toggleStarred}
             />
           </li>
         ))}

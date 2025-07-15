@@ -123,12 +123,34 @@ body {
   border-color: #bd2130;
   color: #fff;
 }
+.star {
+  display: inline-block;
+  position: absolute;
+  left: -230px;
+  bottom: 0px;
+  font-size: 50px;
+  color: blue;
+  cursor: pointer;
+}
+.star_checked {
+  display: inline-block;
+  position: absolute;
+  left: -230px;
+  bottom: 0px;
+  font-size: 50px;
+  color: blue;
+  cursor: pointer;
+}
+.star_disabled {
+  display: none;
+}
 .btn__disabled {
   background-color: rgb(194, 180, 180);
   color: rgb(129, 124, 124);
   padding: 0.8rem 1rem 0.7rem;
   text-transform: capitalize;
 }
+
 .btn__specific {
   background-color: #640ec5;
   border-color: #7f5ebd;
