@@ -17,6 +17,7 @@ function App() {
   const [title, setTitle] = useState(() => prompt("Enter your name"));
   const [syncStatus, setSyncStatus] = useState(false);
   const [count, setCount] = useState(0);
+  const [completed, setCompleted] = useState(0);
   const [currentVal, setValues] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
   async function fetchData() {
@@ -231,7 +232,7 @@ function App() {
   // App filtering tasks logic
 
   let countNoun = "tasks";
-
+  let countNoun2 = "tasks";
   // Set up the different filters
   const [filter, setFilter] = useState("All");
   const FILTER_MAP = {
@@ -264,6 +265,9 @@ function App() {
   // Recalculate number of tasks and adjust the naming conventions based on it
   if (count == 1) {
     countNoun = "task";
+  }
+  if (completed == 1) {
+    countNoun2 = "task";
   }
   let empty = false;
   if (count == 0) {
@@ -307,13 +311,16 @@ function App() {
   }
   useEffect(() => {
     if (filter == "MyDay") {
-      let counter = 0;
+      setCompleted(0);
+      console.log(filteredEls);
       filteredEls.forEach((el) => {
+        console.log(el.isChecked);
         if (el.isChecked) {
-          counter++;
+          setCompleted(completed + 1);
         }
       });
-      setCount(filteredEls.length - counter);
+      setCount(filteredEls.length - completed);
+      console.log(completed);
     }
   }, [filter]);
   // Renders everything using all the logic functions above and in other files
@@ -333,6 +340,14 @@ function App() {
       <Form id="new-todo-input" type="text" addTask={addTask} />
       <div className="filters btn-group stack-exception">{filterList}</div>
       <h2 id="list-heading" tabIndex="-1" ref={listHeadingRef}>
+        {filter == "MyDay" ? (
+          <>
+            {completed} {countNoun2} completed
+            <br />
+          </>
+        ) : (
+          <></>
+        )}
         {!empty ? (
           <>
             {count} {countNoun} remaining
