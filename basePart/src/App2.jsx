@@ -85,6 +85,19 @@ function App() {
   function overrideLocalStorage() {
     localStorage.setItem("Tasks", JSON.stringify(currentVal));
   }
+  function pull() {
+    if (!isDataFetched) return;
+
+    const waiter = setTimeout(() => {
+      updateFireStore().catch((error) => {
+        console.log("Error " + error);
+        setSyncStatus(false);
+      });
+    }, 1000);
+    return () => {
+      clearTimeout(waiter);
+    };
+  }
   useEffect(() => {
     if (isDataFetched) {
       overrideLocalStorage();
@@ -268,19 +281,7 @@ Below here is identical
   function viewStatus() {
     alert("Synced: " + syncStatus);
   }
-  function pull() {
-    if (!isDataFetched) return;
 
-    const waiter = setTimeout(() => {
-      updateFireStore().catch((error) => {
-        console.log("Error " + error);
-        setSyncStatus(false);
-      });
-    }, 1000);
-    return () => {
-      clearTimeout(waiter);
-    };
-  }
   function detectHyperlink(element) {
     const hyperlinkExists =
       element.includes("https") || element.includes("http");
