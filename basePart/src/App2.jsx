@@ -311,18 +311,17 @@ function App() {
   }
   useEffect(() => {
     if (filter == "MyDay") {
-      setCompleted(0);
-      console.log(filteredEls);
+      let countCompleted = 0;
       filteredEls.forEach((el) => {
         console.log(el.isChecked);
         if (el.isChecked) {
-          setCompleted(completed + 1);
+          countCompleted++;
         }
       });
-      setCount(filteredEls.length - completed);
-      console.log(completed);
+      setCompleted(countCompleted);
+      setCount(filteredEls.length - countCompleted);
     }
-  }, [filter]);
+  }, [currentVal, filter]);
   // Renders everything using all the logic functions above and in other files
   return (
     <div className="todoapp stack-la  rge">
