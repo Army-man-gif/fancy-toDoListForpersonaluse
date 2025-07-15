@@ -123,9 +123,6 @@ body {
   border-color: #bd2130;
   color: #fff;
 }
-#clear {
-  background-color: #bcd71d;
-}
 .star {
   display: inline-block;
   font-size: 50px;
@@ -172,11 +169,36 @@ body {
   padding: 0 1rem;
 }
 .btn-group > * {
-  flex: 0 1 auto;
+  flex: 1 1 auto;
   max-width: 100%;
+  min-width: auto;
+  text-align: center;
+}
+#clear {
+  background-color: #bcd71d;
+  width: 100%;
+  box-sizing: border-box;
 }
 .btn-group > * + * {
   margin-left: 0.8rem;
+}
+@media screen and (max-width: 480px) {
+  .btn-group {
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .btn-group > * {
+    flex: 1 1 calc(30% - 0.6rem);
+    max-width: 100%;
+    min-width: 120px;
+  }
+
+  #clear {
+    flex: 1 1 100%;
+    width: 100%;
+    background-color: #bcd71d;
+  }
 }
 .label-wrapper {
   flex: 0 0 100%;
