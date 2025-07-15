@@ -144,12 +144,20 @@ function Task({
     if (DeleteButton.current && DeleteButton.current.disabled) {
       DeleteButton.current.className = "btn__disabled";
     }
-
+    if (DeleteButton.current && !DeleteButton.current.disabled) {
+      DeleteButton.current.className = "btn btn__danger";
+    }
     if (editButtonRef.current && editButtonRef.current.disabled) {
       editButtonRef.current.className = "btn__disabled";
     }
+    if (editButtonRef.current && !editButtonRef.current.disabled) {
+      editButtonRef.current.className = "btn";
+    }
     if (myDayButton.current && myDayButton.current.disabled) {
       myDayButton.current.className = "btn__disabled";
+    }
+    if (myDayButton.current && !myDayButton.current.disabled) {
+      myDayButton.current.className = "btn btn__danger";
     }
     if (StarredButton.current && StarredButton.current.disabled) {
       StarredButton.current.className = "btn star_disabled";
