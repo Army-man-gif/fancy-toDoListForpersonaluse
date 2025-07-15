@@ -58,20 +58,20 @@ function App() {
           await updateData(
             task.id,
             {
-              name: task.name,
-              isChecked: task.isChecked,
-              myDay: task.myDay,
-              isStarred: task.isStarred,
+              name: task.name ?? "",
+              isChecked: task.isChecked ?? false,
+              myDay: task.myDay ?? false,
+              isStarred: task.isStarred ?? false,
             },
             title,
           );
         }
       } else {
         await addData(title, task.id, {
-          name: task.name,
-          isChecked: task.isChecked,
-          myDay: task.myDay,
-          isStarred: task.isStarred,
+          name: task.name ?? "",
+          isChecked: task.isChecked ?? false,
+          myDay: task.myDay ?? false,
+          isStarred: task.isStarred ?? false,
         });
       }
     }
