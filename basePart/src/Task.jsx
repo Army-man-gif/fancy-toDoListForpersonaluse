@@ -84,15 +84,6 @@ function Task({
             newName
           )}
         </label>
-        <button
-          type="button"
-          ref={StarredButton}
-          onClick={() => toggleStarred(id)}
-          aria-label="star-button"
-          disabled={isChecked}
-        >
-          {isStarred ? "★" : "✧"}
-        </button>
       </div>
       <div className="btn-group">
         <button
@@ -135,6 +126,16 @@ function Task({
             Add to myDay <span className="visually-hidden">{newName}</span>
           </button>
         )}
+        <button
+          type="button"
+          ref={StarredButton}
+          className="btn star"
+          onClick={() => toggleStarred(id)}
+          aria-label="star-button"
+          disabled={isChecked}
+        >
+          {isStarred ? "★" : "✧"}
+        </button>
       </div>
     </>
   );
@@ -151,16 +152,13 @@ function Task({
       myDayButton.current.className = "btn__disabled";
     }
     if (StarredButton.current && StarredButton.current.disabled) {
-      StarredButton.current.classList.add("star__disabled");
-      StarredButton.current.classList.remove("star");
-      StarredButton.current.classList.remove("star_checked");
+      StarredButton.current.className = "btn star_disabled";
     }
     if (StarredButton.current && !StarredButton.current.disabled) {
-      StarredButton.current.classList.remove("star__disabled");
       if (isStarred) {
-        StarredButton.current.classList.add("star_checked");
+        StarredButton.current.className = "btn star_checked";
       } else {
-        StarredButton.current.classList.add("star");
+        StarredButton.current.className = "btn star";
       }
     }
   }, [isChecked]);

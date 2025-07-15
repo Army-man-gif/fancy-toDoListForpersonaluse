@@ -231,7 +231,7 @@ Below here is identical
     Active: (task) => !task.isChecked,
     Completed: (task) => task.isChecked,
     Clear_Storage: () => true,
-    MyDay: (task) => task.myDay && !task.isChecked,
+    MyDay: (task) => task.myDay,
     importantTasks: (task) => task.isStarred && !task.isChecked,
   };
   const FILTER_NAMES = Object.keys(FILTER_MAP);

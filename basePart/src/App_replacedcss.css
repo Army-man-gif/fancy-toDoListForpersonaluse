@@ -125,18 +125,12 @@ body {
 }
 .star {
   display: inline-block;
-  position: absolute;
-  left: -230px;
-  bottom: 0px;
   font-size: 50px;
   color: blue;
   cursor: pointer;
 }
 .star_checked {
   display: inline-block;
-  position: absolute;
-  left: -230px;
-  bottom: 0px;
   font-size: 50px;
   color: blue;
   cursor: pointer;
