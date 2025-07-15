@@ -170,14 +170,15 @@ body {
 }
 .btn-group {
   display: flex;
-  gap: 1.1rem;
-  justify-content: space-between;
+  gap: 0rem;
+  justify-content: flex-start;
+  padding: 0 1rem;
 }
 .btn-group > * {
-  flex: 1 1 auto;
+  flex: 0 1 auto;
 }
 .btn-group > * + * {
-  margin-left: -1.5rem;
+  margin-left: 0.2rem;
 }
 .label-wrapper {
   flex: 0 0 100%;
