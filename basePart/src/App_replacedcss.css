@@ -183,13 +183,13 @@ body {
   margin-left: 0.8rem;
 }
 @media screen and (max-width: 480px) {
-  .btn-group {
+  .filtering.btn-group {
     flex-wrap: wrap;
     gap: 0.3rem;
     padding: 0 0.5rem;
   }
 
-  .btn-group > * {
+  .filtering.btn-group > * {
     flex: 1 1 0;
     min-width: 30%;
     max-width: none;
@@ -197,7 +197,7 @@ body {
     padding: 0.6rem 0.4rem;
   }
 
-  #clear {
+  .filtering#clear {
     flex: 1 1 100%;
     width: 100%;
     margin-top: 0.8rem;

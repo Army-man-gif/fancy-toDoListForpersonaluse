@@ -337,7 +337,9 @@ function App() {
         </div>
       )}
       <Form id="new-todo-input" type="text" addTask={addTask} />
-      <div className="filters btn-group stack-exception">{filterList}</div>
+      <div className="filtering filters btn-group stack-exception">
+        {filterList}
+      </div>
       <h2 id="list-heading" tabIndex="-1" ref={listHeadingRef}>
         {filter == "MyDay" ? (
           <>
