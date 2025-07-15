@@ -176,6 +176,7 @@ body {
 }
 .btn-group > * {
   flex: 0 1 auto;
+  max-width: 100%;
 }
 .btn-group > * + * {
   margin-left: 0.2rem;
