@@ -9,6 +9,7 @@ function Button({ val, isPressed, setFilter, handleClearStorage }) {
   return (
     <button
       type="button"
+      id={val == "Clear_Storage" ? "clear" : undefined}
       className="btn toggle-btn"
       aria-pressed={isPressed}
       onClick={() => decider(val, setFilter, handleClearStorage)}

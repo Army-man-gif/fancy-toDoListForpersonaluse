@@ -234,7 +234,6 @@ function App() {
     <Buttons
       key={name}
       val={name}
-      id={name == "Clear_Storage" ? "clear" : undefined}
       isPressed={name === filter}
       setFilter={setFilter}
       setValues={setValues}
