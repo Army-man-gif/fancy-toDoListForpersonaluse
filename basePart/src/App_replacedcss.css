@@ -123,6 +123,9 @@ body {
   border-color: #bd2130;
   color: #fff;
 }
+#clear {
+  background-color: #ea430b;
+}
 .star {
   display: inline-block;
   font-size: 50px;

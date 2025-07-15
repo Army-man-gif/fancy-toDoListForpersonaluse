@@ -132,11 +132,6 @@ function App() {
     }
   }, [storageCleared]);
 
-  /*
----------------------------------------------------------------------------
-Below here is identical
-
-*/
   // Edit tasks
   function editTask(id, newName) {
     const editedTasks = currentVal.map((task) => {
@@ -239,6 +234,7 @@ Below here is identical
     <Buttons
       key={name}
       val={name}
+      id={name == "Clear_Storage" ? "clear" : undefined}
       isPressed={name === filter}
       setFilter={setFilter}
       setValues={setValues}
