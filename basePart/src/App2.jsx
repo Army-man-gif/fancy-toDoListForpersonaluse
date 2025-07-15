@@ -198,17 +198,19 @@ Below here is identical
       if (id === task.id) {
         if (task.isChecked == true) {
           confetti = false;
+          return { ...task, isChecked: false };
+        } else {
+          return { ...task, isChecked: true };
         }
-        return { ...task, isChecked: !task.isChecked };
       }
       return task;
     });
+    setValues(updatedTasks);
     if (confetti) {
       setShowConfetti(true);
     } else {
       setShowConfetti(false);
     }
-    setValues(updatedTasks);
   }
 
   useEffect(() => {
@@ -229,8 +231,8 @@ Below here is identical
     Active: (task) => !task.isChecked,
     Completed: (task) => task.isChecked,
     Clear_Storage: () => true,
-    MyDay: (task) => task.myDay,
-    importantTasks: (task) => task.isStarred,
+    MyDay: (task) => task.myDay && !task.isChecked,
+    importantTasks: (task) => task.isStarred && !task.isChecked,
   };
   const FILTER_NAMES = Object.keys(FILTER_MAP);
 
