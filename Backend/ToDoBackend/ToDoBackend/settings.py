@@ -13,21 +13,39 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(os.path.join(BASE_DIR, ".env"))
 
-
-SECRET_KEY = "django-insecure-rarhism!wzi+!9vbv72p5q4$!j0b5k10l75(*syvee23v1n25+"
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS","").split(",")
-CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS","").split(",")
-CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS","").split(",")
+import dj_database_url
 
 DEBUG = True
 
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(BASE_DIR, ".env"))
 
-# Application definition
+
+SECRET_KEY = os.environ.get("SECRET_KEY")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS","").split(",")
+# CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS","").split(",")
+# CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS","").split(",")
+
+
+CSRF_COOKIE_SECURE = True      
+CSRF_COOKIE_SAMESITE = "None"
+CSRF_COOKIE_HTTPONLY = False
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = "None"
+
+
+from corsheaders.defaults import default_headers  
+CORS_ALLOW_HEADERS = list(default_headers) + [  
+    "x-sessionid",  
+    "x-csrftoken",  
+]
+CORS_ALLOW_CREDENTIALS = True
+SECURE_SSL_REDIRECT = True
+
+ROOT_URLCONF = "ToDoBackend.urls"
+
 
 INSTALLED_APPS = [
     "DatabaseLogic"
@@ -49,21 +67,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "ToDoBackend.urls"
 
-CSRF_COOKIE_SECURE = True      
-CSRF_COOKIE_SAMESITE = "None"
-CSRF_COOKIE_HTTPONLY = False
-SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_SAMESITE = "None"
 
-from corsheaders.defaults import default_headers  
-CORS_ALLOW_HEADERS = list(default_headers) + [  
-    "x-sessionid",  
-    "x-csrftoken",  
-]
-CORS_ALLOW_CREDENTIALS = True
-SECURE_SSL_REDIRECT = True
+
 
 TEMPLATES = [
     {
@@ -83,8 +89,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "ToDoBackend.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
     "default": {
@@ -113,8 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
+
 
 LANGUAGE_CODE = "en-us"
 
@@ -125,12 +128,8 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
