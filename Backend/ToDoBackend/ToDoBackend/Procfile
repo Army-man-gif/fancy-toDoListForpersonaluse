@@ -1,0 +1,1 @@
+web: gunicorn workoutRecords.wsgi --log-file -
