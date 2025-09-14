@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "DatabaseLogic"
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -45,13 +46,27 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
+    "databaseForRecords.middleware.CustomMiddleware.CustomCsrfMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 ROOT_URLCONF = "ToDoBackend.urls"
+
+CSRF_COOKIE_SECURE = True      
+CSRF_COOKIE_SAMESITE = "None"
+CSRF_COOKIE_HTTPONLY = False
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = "None"
+
+from corsheaders.defaults import default_headers  
+CORS_ALLOW_HEADERS = list(default_headers) + [  
+    "x-sessionid",  
+    "x-csrftoken",  
+]
+CORS_ALLOW_CREDENTIALS = True
+SECURE_SSL_REDIRECT = True
 
 TEMPLATES = [
     {
