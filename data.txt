@@ -1,0 +1,517 @@
+[
+  {
+    "id": "todo--Z-wwxykuiPzUd1TY-dVK",
+    "name": "GoStudent  tutor application process started",
+    "myDay": false,
+    "isStarred": false,
+    "isChecked": true
+  },
+  {
+    "id": "todo--ogvPBLpBKHZpUC0p9ngl",
+    "isChecked": false,
+    "name": "Write a program that when i change my CV it saves the old version, archives it, renames this with current datew and updates the cover letter and cover_letter and cv and perhaps makes copies of those and archives those too",
+    "isStarred": true,
+    "myDay": false
+  },
+  {
+    "id": "todo-0Mlc5riTNwa6QkDKiGzjZ",
+    "isStarred": false,
+    "name": "Fix mobile styling",
+    "isChecked": true,
+    "myDay": true
+  },
+  {
+    "id": "todo-13vilDS6nthIZBC8HITmn",
+    "name": "Cover Letter for placements",
+    "isStarred": false,
+    "isChecked": false,
+    "myDay": true
+  },
+  {
+    "id": "todo-14yXY-yJjOTH5v56R5qyV",
+    "name": "No due date or long due date option filters",
+    "myDay": false,
+    "isStarred": false,
+    "isChecked": false
+  },
+  {
+    "id": "todo-19gzxdt9qHp6ePLeOaqXX",
+    "myDay": true,
+    "isChecked": false,
+    "name": "Before making health website make a temp quick easy weight, reps,set, exercise website recorder",
+    "isStarred": true
+  },
+  {
+    "id": "todo-1DUX-3Qwg5jChrGUz4xDN",
+    "name": "Make the thing mum was saying on dads website concept into a website",
+    "isChecked": false,
+    "isStarred": false,
+    "myDay": false
+  },
+  {
+    "id": "todo-1Q8cerbshJzVugwwMQmFp",
+    "name": "some pretty ai related jobs here rn https://uk.indeed.com/?vjk=3e122c57b6f2bbaa&advn=7831672186689475",
+    "myDay": false,
+    "isStarred": true,
+    "isChecked": false
+  },
+  {
+    "id": "todo-262D1-4uYYSZpu16yt-tC",
+    "name": "Email lady about ocean swimming course",
+    "isChecked": true
+  },
+  {
+    "id": "todo-2RfVe3ooBnsw9Hjfh-khM",
+    "isStarred": false,
+    "isChecked": false,
+    "name": "Check \"Access project\" as mentioned by mum",
+    "myDay": false
+  },
+  {
+    "id": "todo-2jcG4s-GmWSnZDrRta-7b",
+    "isChecked": true,
+    "name": "Tell easy lettings about broken cupboard door and wait for reply email"
+  },
+  {
+    "id": "todo-32oUtEDq1X8TnL9RTSJPY",
+    "name": "Allow tasks to be rearranged order wise which is reflected in subsequent loads",
+    "myDay": false,
+    "isChecked": false
+  },
+  {
+    "id": "todo-3aORc24HZpfzUzQ27Hfge",
+    "myDay": false,
+    "name": "Add a search for the long filters, like All,Active and Completed",
+    "isStarred": true,
+    "isChecked": false
+  },
+  {
+    "id": "todo-3zx-C-YdbEQ0R9yZ078eg",
+    "isChecked": false,
+    "name": "Add categories to app",
+    "isStarred": false,
+    "myDay": false
+  },
+  {
+    "id": "todo-4DbPBen8rbhNws7dyYQtc",
+    "name": "Tasks remain in myday even if completed only for the day. After day finishes completed tasks dissappear off myday",
+    "isStarred": true,
+    "isChecked": false,
+    "myDay": false
+  },
+  {
+    "id": "todo-4iJdJrGZ2msFQDmoeRIX2",
+    "isChecked": true,
+    "name": "Badminton today at 11-12 (became two hours for the price of one)"
+  },
+  {
+    "id": "todo-4od4jGBAGIOYUnAFid5vE",
+    "isChecked": true,
+    "name": "Go gym",
+    "myDay": true,
+    "isStarred": false
+  },
+  {
+    "id": "todo-5HBL-k-M7o9KtIEY1KUJw",
+    "isChecked": true,
+    "name": "Book badminton"
+  },
+  {
+    "id": "todo-5IbVUhrGuq9yPlXuul6Nw",
+    "myDay": false,
+    "isChecked": false,
+    "isStarred": true,
+    "name": "Check out csstudentexperience email"
+  },
+  {
+    "id": "todo-5QClVrvQlEnTawFThv0Wm",
+    "isChecked": true,
+    "name": "Tell bavneet the weights she did"
+  },
+  {
+    "id": "todo-5k78lkKz39LR-gvMOavTy",
+    "name": "And just for fun make a site on the demon slayer breathing styles and forms",
+    "isChecked": false,
+    "myDay": false,
+    "isStarred": false
+  },
+  {
+    "id": "todo-6rgsDHdEF9BEpM3BNBpSy",
+    "name": "Re-enroll for second year course",
+    "isChecked": true
+  },
+  {
+    "id": "todo-7Z3wxQKv2IuJl7OuI7FaB",
+    "isChecked": false,
+    "name": "Keep seeing it everywhere.  Try and make an eye and hand gesture video control app",
+    "isStarred": false,
+    "myDay": false
+  },
+  {
+    "id": "todo-9RKKCXGt7XsO2l6tjq4om",
+    "myDay": false,
+    "isStarred": false,
+    "name": "Filter for tasks with a aspiration to complete quite soon but not TMWR TMWR",
+    "isChecked": false
+  },
+  {
+    "id": "todo-9TeyC9hnvZxMiym04l9bP",
+    "isChecked": false,
+    "name": "Add an option to select multiple and group them making that group labellable and minimisable"
+  },
+  {
+    "id": "todo-C8d3M3MWKylxlhbQxaLYC",
+    "isChecked": false,
+    "name": "Convert health desktop app to deployed website"
+  },
+  {
+    "id": "todo-CPSXue414cKSfbVH5DdiX",
+    "myDay": false,
+    "name": "Add a filter to list app entitled projects",
+    "isChecked": false,
+    "isStarred": true
+  },
+  {
+    "id": "todo-D2MrpMq3i1fG7XFqC9js9",
+    "isChecked": true,
+    "name": "Add a default syncing option"
+  },
+  {
+    "id": "todo-DNJOAn7vUC4v_g4DYs1MB",
+    "isChecked": true,
+    "myDay": true,
+    "name": "Basically completion is not persisting, and something is wrong with the count",
+    "isStarred": true
+  },
+  {
+    "id": "todo-DYr9mSkW7Ri8rBEayXNIJ",
+    "isChecked": false,
+    "myDay": true,
+    "name": "Add to the hyperlink detection feature the www. Comptalibiry from when it converts it to an alias",
+    "isStarred": false
+  },
+  {
+    "id": "todo-EsWTwKIKlvGngblp7BQD1",
+    "name": "Add due dates and reminders",
+    "isChecked": false
+  },
+  {
+    "id": "todo-Fq7ip__RAGb6T9PMBYfPz",
+    "isChecked": false,
+    "name": "Tutoring jobs on indeed: https://uk.indeed.com/jobs?q=tutoring+maths&l=London%2C+Greater+London&radius=25&from=searchOnDesktopSerp&cf-turnstile-response=0.SonMwi-EomoMpxsbnJaJd4IKJ0PnjMA0EhV8RUDWElOAgKMIM5wtuur94YLjtrPplDGY5oFZItXi9U1OTQdrHOJBB506LMS4SnycG7oBdn34wXXz0x5dyiIWo0b7BQQm6biRFEq26gEC-Bq_BQpAfLrcKhonpBBagaXrnm0tBFI87HTQNf0lGeBI5D84fRlWOZxqOcQDVB9ODVTQsPYF26Y4buiDTi-T7EzJRiqZlAtOlzeZ7M8rDyPLnKZMtkA3pkP54qm_uPFH0W7Zf4jCm7IG930NlyEnFEqzK1ptHZWQOlHbXahpxKiz5-elbQ0PxOV23vFqf_y3DQhXRartGX8V81jo-BL6SBFS_w46u7IJwU4ulqmV0i-LOBq5I6h7pPfMUxXlMARbIw8LHaLr_wnyCLnXaW9xV47wL11ccEldTJANh8G-F2k0zXHKGftOcw9JcxXty5oHnnL8xTre8r7n8WXFpEmVJSxK8DjpttAuvabawlslMcljxRpUvethA_7r4wSinIXrPThFi2bgQOJCC64TH-Reo6tf_5SCK4OACYoT1D49DKrDdWobJ_v7aC2APDIUtnbEpvYPEjSVi0gKU-xUJjPWagrJ9W8zddAmMJA1wKp48s6piqgWIKSMXvxaSgA9lDgAi58_rxUFTWn9EPHe9UZwgdNHE2pIBAOT_RMxgYdPMDOlSSilTkQphIRv2pAZdoiKP8XkOOT4Fit-krNkXMvQ3injmXvQJ0VYc6DDQgEDgr2zYuvTAIcli-TuLWqF68Z84O8ElCsuQ18P5_5p-fTKpnnNDPWGChqaTGmjXIPo0NJRaWNpOK--ZQ6xt3L5LPhy9VCj2jDQn_pnr83Vh0RFNwyCRCiKbmzTX3kXLcQ5FgVquqU6eGPUlz8B9lcQtHwo_g4ItfKVdBYntBYkvihcSMCOvWIBAgo.SerTTWqY-A-PUYnfcLFX2Q.b550b91a301f29e0386eb09b0e680825de3750818b2462d345511ee5655496c6&vjk=cc4fcec51d4335a1&advn=88595320386199"
+  },
+  {
+    "id": "todo-GSKPfG5ihd7sjnGTh5zuD",
+    "isStarred": false,
+    "myDay": true,
+    "isChecked": true,
+    "name": "Revolut has several of these internship programmes for 2026. You will have to study and check which one is suitable for you, or might decide to apply to multiple of these. We can discuss once you have studied: https://uk.indeed.com/jobs?q=internship+programme+2026&l=London%2C+Greater+London&vjk=fff5a3993cebe959"
+  },
+  {
+    "id": "todo-Hcnc_ltaCa5w3Lg6tmZCL",
+    "name": "Get membership for gym b4 taking Bavneet and Piri to gym",
+    "isChecked": true
+  },
+  {
+    "id": "todo-ITbrNeAxsYK_YoYE3k30_",
+    "name": "Add a database system for persistent storage across devices feature to web app to do list",
+    "isChecked": true
+  },
+  {
+    "id": "todo-KN_NRTxDAM8u3j3vdJKrd",
+    "name": "Add an undo option",
+    "isChecked": false
+  },
+  {
+    "id": "todo-LAeQsK3ruXS27LUVaW5Gb",
+    "name": "Learn Typescript, quite similar to Javascript",
+    "isChecked": false,
+    "isStarred": true,
+    "myDay": false
+  },
+  {
+    "id": "todo-LcTbml8_UBeMu1AsnB-TD",
+    "isStarred": false,
+    "myDay": true,
+    "isChecked": true,
+    "name": "Add so that the MyDay filter shows the number of completed and remaining tasks"
+  },
+  {
+    "id": "todo-OEhZ2ZsbUEfNNJO4auI2j",
+    "name": "Add a sort of grouping learning system, like repetition of an uncommon word after a threshold groups it",
+    "myDay": false,
+    "isChecked": false,
+    "isStarred": false
+  },
+  {
+    "id": "todo-OErjlStUYKK3g6ZjyKXt5",
+    "isChecked": true,
+    "name": "Make basic to-do-list website for personal use"
+  },
+  {
+    "id": "todo-PFnvO6_hvY2dZ-UsIDajh",
+    "name": "Perhaps learn and use service workers to cache current state to allow offline use",
+    "isChecked": false
+  },
+  {
+    "id": "todo-PQAyu9nzHUhINqKzTx1og",
+    "isChecked": true,
+    "isStarred": false,
+    "myDay": false,
+    "name": "Add importance filters to to do list"
+  },
+  {
+    "id": "todo-Pr6_wm6cW6djT550viKdS",
+    "isChecked": false,
+    "name": "Learn how to automate build and deploy on github through Docker"
+  },
+  {
+    "id": "todo-Qumq1FQfiB_RXLX8cKoZm",
+    "isChecked": true,
+    "isStarred": false,
+    "myDay": true,
+    "name": "Find out where the star thing went why it's not showing on phone"
+  },
+  {
+    "id": "todo-RIhsAX6D4CI80ewstU34G",
+    "name": "Make app with django backend and react native for mum - the Wikimedia thing, only learn the parts of the framework you need to",
+    "isChecked": false
+  },
+  {
+    "id": "todo-TSPGAJpCGVATX-zLxePiJ",
+    "name": "Check everyday for egg,milk,cereal and bread",
+    "isChecked": false
+  },
+  {
+    "id": "todo-TjtR93H7iICwCEhl4gmKz",
+    "isChecked": false,
+    "name": "Make a portfolio website. Rssearch what's good for it",
+    "myDay": false,
+    "isStarred": false
+  },
+  {
+    "id": "todo-UT6qAYNnWGvVzm27R29X3",
+    "name": "Look at authentication on firestore and the rules for the testing database and what that means and how to make it a production one and what that means",
+    "isChecked": false,
+    "isStarred": true,
+    "myDay": false
+  },
+  {
+    "id": "todo-W8CYUJ6et8iqldNMZZcJM",
+    "name": "Start leetcode at some point",
+    "isChecked": false
+  },
+  {
+    "id": "todo-WeP7cm8EDEA4eJS97l2GW",
+    "isStarred": true,
+    "name": "Investigate youth mobility scheme for which countries",
+    "myDay": false,
+    "isChecked": false
+  },
+  {
+    "id": "todo-WfkMXmaUbMVNtVXFQZVy0",
+    "isStarred": false,
+    "isChecked": true,
+    "myDay": false,
+    "name": "Manage the local storage and database logic and toggling"
+  },
+  {
+    "id": "todo-Y6lt-_AljQ_Bqee6lFHhB",
+    "myDay": false,
+    "name": "Learn what AWS is. Always been curious",
+    "isStarred": false,
+    "isChecked": false
+  },
+  {
+    "id": "todo-YoBwplCJoBUtSLIxsuUBA",
+    "name": "Httyd and demon slayer fun cool site",
+    "myDay": false,
+    "isStarred": false,
+    "isChecked": false
+  },
+  {
+    "id": "todo-Z00-dVJiM8ZBbwItGqZ66",
+    "isChecked": false,
+    "name": "Start looking at placement jobs coming up and start applying"
+  },
+  {
+    "id": "todo-Zx1cVz1xvPpK1XV__Xqg7",
+    "isChecked": false,
+    "myDay": false,
+    "name": "An app that collates all the resources from canvas either from downaloads or straight from canvas and all hyperlinks to reading lists and makes and updates a spreadsheet of my progress. To be done b4 yr 2 starts",
+    "isStarred": true
+  },
+  {
+    "id": "todo-_OtL4ENTRoYbGWJSXVkG0",
+    "name": "Explore learning Ruislip one: https://careers-explorelearning.icims.com/jobs/3904/maths-and-english-tutor/job",
+    "isChecked": false
+  },
+  {
+    "id": "todo-aA9wEFYaCh9Py7_xK_HhN",
+    "name": "Python llms, hugging face, tensor flow,pytorch,pylance",
+    "isStarred": false,
+    "myDay": false,
+    "isChecked": false
+  },
+  {
+    "id": "todo-bL7H4a6BgA3oFigYEXR4t",
+    "name": "Perhaps add a disable edit and delete button feature when tasks are completed, that can be reversed if they are unchecked",
+    "isChecked": true
+  },
+  {
+    "id": "todo-bRzj-QH8LtY4w9mIGpznE",
+    "isChecked": false,
+    "name": "Apply for tuition jobs"
+  },
+  {
+    "id": "todo-brLtr86Rrs7yEBMwTUH5n",
+    "myDay": false,
+    "isChecked": false,
+    "name": "Tutor GoStudent look out for email from them: https://www.gostudent.org/en-gb/reviews/?_gl=1*4bujhv*_up*MQ..*_ga*MTMzMDM3NjMyMi4xNzUyNDkxOTcy*_ga_NPK2S3CYH4*czE3NTI0OTE5NzEkbzEkZzAkdDE3NTI0OTIwOTQkajYwJGwwJGgzMTIwNTcyNjU.*_ga_H4G2RJ007S*czE3NTI0OTE5NzEkbzEkZzEkdDE3NTI0OTIwOTQkajYwJGwwJGgxNTA0NTMzMjU2",
+    "isStarred": false
+  },
+  {
+    "id": "todo-cpfuxLI-zuwkF6FGV6p4s",
+    "isChecked": false,
+    "name": "Change all of CSS to your own to make it your own style"
+  },
+  {
+    "id": "todo-gFfiH8dMQkWAqA7ErBP-X",
+    "myDay": false,
+    "isChecked": false,
+    "name": "PostegreSQL,SQL,MongoDB",
+    "isStarred": true
+  },
+  {
+    "id": "todo-hAZ_MaI2RlNEneEJjfxp0",
+    "myDay": false,
+    "isChecked": true,
+    "name": "Add a myDay filter",
+    "isStarred": false
+  },
+  {
+    "id": "todo-iI1IDlgS9105bYeQGnlln",
+    "isStarred": false,
+    "myDay": true,
+    "name": "Socks wash",
+    "isChecked": false
+  },
+  {
+    "id": "todo-krndi8Ony8oCUHAtj3z0V",
+    "myDay": false,
+    "name": "Do the Android Studio 3 learner courses to learn android making apps",
+    "isStarred": true,
+    "isChecked": false
+  },
+  {
+    "id": "todo-kzpJwfjhN5u3NLWrAVEhx",
+    "myDay": false,
+    "isStarred": false,
+    "name": "Add a sublist or seperare page list option for each task",
+    "isChecked": false
+  },
+  {
+    "id": "todo-mNyrKw73gYbiA462_Rcf_",
+    "name": "Book driving lesson [whenever it becomes available]",
+    "isChecked": false
+  },
+  {
+    "id": "todo-mu2INsQj3vf45_4mbMeKk",
+    "isChecked": false,
+    "isStarred": true,
+    "name": "Srinivas's birthday this weekend",
+    "myDay": false
+  },
+  {
+    "id": "todo-nGsQ_SKWCEvwP80bqvQ1n",
+    "isChecked": true,
+    "name": "Go exeter for Yiya's birthday next weekend",
+    "isStarred": true,
+    "myDay": false
+  },
+  {
+    "id": "todo-nghOlCY4ngw6WahKr7FA_",
+    "name": "Tutor GoStudent look out for email from them: https://www.gostudent.org/en-gb/reviews/?_gl=1*4bujhv*_up*MQ..*_ga*MTMzMDM3NjMyMi4xNzUyNDkxOTcy*_ga_NPK2S3CYH4*czE3NTI0OTE5NzEkbzEkZzAkdDE3NTI0OTIwOTQkajYwJGwwJGgzMTIwNTcyNjU.*_ga_H4G2RJ007S*czE3NTI0OTE5NzEkbzEkZzEkdDE3NTI0OTIwOTQkajYwJGwwJGgxNTA0NTMzMjU2",
+    "isChecked": true,
+    "myDay": true,
+    "isStarred": false
+  },
+  {
+    "id": "todo-oADOmv0e9q9-8iHneqvxm",
+    "myDay": true,
+    "isStarred": false,
+    "name": "Shopping",
+    "isChecked": true
+  },
+  {
+    "id": "todo-oTGbtegiuRNIbIRzX0fgk",
+    "isStarred": true,
+    "myDay": false,
+    "isChecked": false,
+    "name": "Email studentgroup tutor about no follow up on monday"
+  },
+  {
+    "id": "todo-oxr4kzG9NqW455D99-iwP",
+    "isChecked": false,
+    "isStarred": false,
+    "name": "Make a nice looking site depicting the dev ops ss i have and another one for the code editors",
+    "myDay": false
+  },
+  {
+    "id": "todo-rS0eJ0lAkw9w8y_pxH3tI",
+    "isChecked": false,
+    "name": "Make a training regimen for them"
+  },
+  {
+    "id": "todo-rptLQFRUNpz8FZ0fuF2LS",
+    "isChecked": true,
+    "name": "Check out of first year accomodation"
+  },
+  {
+    "id": "todo-rxRqX98Z0I-LGdVymVXnl",
+    "isChecked": true,
+    "isStarred": false,
+    "name": "Revolut has several of these internship programmes for 2026. You will have to study and check which one is suitable for you, or might decide to apply to multiple of these. We can discuss once you have studied: https://uk.indeed.com/jobs?q=internship+programme+2026&l=London%2C+Greater+London&vjk=fff5a3993cebe959",
+    "myDay": true
+  },
+  {
+    "id": "todo-wNsVvn8Ytn5WORH9A5WWZ",
+    "isStarred": false,
+    "name": "Sit and discuss with dad findings",
+    "isChecked": false,
+    "myDay": true
+  },
+  {
+    "id": "todo-wzlAjkFCFnUJCdKQzodex",
+    "isChecked": true,
+    "myDay": true,
+    "name": "Add so that if no name is added on prompt it pulls and displays the data in local storage and disables sync button",
+    "isStarred": false
+  },
+  {
+    "id": "todo-xZqtKiLGkj11Tbihgq5Ya",
+    "isChecked": true,
+    "myDay": true,
+    "name": "Adjust filters and buttons so they fit or maybe make some a dropdown select",
+    "isStarred": false
+  },
+  {
+    "id": "todo-y2xkB5v-HPOXNW661c6IS",
+    "name": "Add a feature that detects hyperlinks ",
+    "isChecked": true
+  },
+  {
+    "id": "todo-y6zc3a5NGgRVOIJccmjnN",
+    "name": "Add a sort of repeat task option for daily,weekly,monthly and yearly",
+    "isStarred": true,
+    "isChecked": false,
+    "myDay": false
+  },
+  {
+    "id": "todo-yO0FA_ZP4Abp2gdbbmoe2",
+    "isChecked": false,
+    "isStarred": false,
+    "name": "Learn how to deploy a backend on github pages through docker",
+    "myDay": false
+  }
+]
