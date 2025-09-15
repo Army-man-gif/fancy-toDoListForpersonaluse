@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Tasks(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
+    name = models.TextField()
     myDay = models.BooleanField(default=False)
     isStarred = models.BooleanField(default=False)
     isChecked = models.BooleanField(default=False)

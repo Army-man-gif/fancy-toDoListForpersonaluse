@@ -9,7 +9,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         username = "Armaan"
-        file_path = "./data.txt"
+        file_path = r"C:\Users\khait\Downloads\fancy-toDoListForpersonaluse\Backend\ToDoBackend\DatabaseLogic\management\commands\data.txt"
 
         User = get_user_model()
 
