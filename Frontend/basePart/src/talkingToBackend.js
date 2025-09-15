@@ -1,4 +1,4 @@
-const intialBackendString = "https://workoutsBackend-qta1.onrender.com/records";
+const intialBackendString = "https:/todolist-bueo.onrender.com/list";
 
 async function getCSRFToken() {
   const fetchTheData = await fetch(`${intialBackendString}/getToken/`, {
@@ -104,9 +104,9 @@ export async function batchupdateTasks() {
   let stored = {};
   let privateBrowsing = false;
   if (!isPrivateBrowsing()) {
-    stored = JSON.parse(localStorage.getItem("tasksToUpdate")) || {};
+    stored = JSON.parse(localStorage.getItem("tasksToUpdate")) || [];
   } else {
-    stored = JSON.parse(sessionStorage.getItem("tasksToUpdate")) || {};
+    stored = JSON.parse(sessionStorage.getItem("tasksToUpdate")) || [];
     privateBrowsing = true;
   }
   const data = { batchUpdate: stored };
@@ -116,9 +116,9 @@ export async function batchupdateTasks() {
   );
   if (updateInBulk.message) {
     if (!privateBrowsing) {
-      localStorage.setItem("tasksToUpdate", JSON.stringify({}));
+      localStorage.setItem("tasksToUpdate", JSON.stringify([]));
     } else {
-      sessionStorage.setItem("tasksToUpdate", JSON.stringify({}));
+      sessionStorage.setItem("tasksToUpdate", JSON.stringify([]));
     }
   } else {
     console.log(updateInBulk.error);
@@ -135,15 +135,15 @@ export async function getData() {
   if (getItAll) {
     if (getItAll["message"]) {
       if (!isPrivateBrowsing()) {
-        localStorage.setItem("data", JSON.stringify(getItAll["data"]));
+        localStorage.setItem("Tasks", JSON.stringify(getItAll["Tasks"]));
       } else {
-        sessionStorage.setItem("data", JSON.stringify(getItAll["data"]));
+        sessionStorage.setItem("Tasks", JSON.stringify(getItAll["Tasks"]));
       }
     } else {
       if (!isPrivateBrowsing()) {
-        localStorage.setItem("data", JSON.stringify({}));
+        localStorage.setItem("Tasks", JSON.stringify([]));
       } else {
-        sessionStorage.setItem("data", JSON.stringify({}));
+        sessionStorage.setItem("Tasks", JSON.stringify([]));
       }
     }
   }

@@ -75,7 +75,7 @@ def getData(request):
     else:
         TasksFound = Tasks.objects.filter(user=request.user.username).values()
         TasksFound = list(TasksFound)
-        return JsonResponse({"data":TasksFound})
+        return JsonResponse({"message":"done","Tasks":TasksFound})
 def cleanAll(request):
     if(not request.user.is_authenticated):
         return JsonResponse({"error":"User not logged in yet"})
@@ -113,7 +113,7 @@ def batchUpdateTasks(request):
         batchupdateData = data.get("batchUpdate",None)
         if(batchupdateData is not None):
             results = []
-            for key,task in batchupdateData.items():
+            for task in batchupdateData:
                 taskObj, created = Tasks.objects.update_or_create(
                     user=request.user,
                     name=task.get("name", ""),
