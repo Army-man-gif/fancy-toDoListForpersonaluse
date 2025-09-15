@@ -165,4 +165,3 @@ export async function deleteSpecificTask(id){
         console.log("Deleted task");
   }
 }
-}
