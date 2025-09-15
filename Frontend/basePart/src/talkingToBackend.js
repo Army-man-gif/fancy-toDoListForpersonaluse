@@ -160,7 +160,7 @@ export async function cleanEverything(){
 }
 export async function deleteSpecificTask(id){
     const data = { id: id};
-    const deleteSpecific = await SendData(`${intialBackendString}/deleteSpecific/`);
+    const deleteSpecific = await SendData(`${intialBackendString}/deleteSpecific/`,data);
     if (deleteSpecific.message) {
         console.log("Deleted task");
   }
