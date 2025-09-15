@@ -5,6 +5,7 @@ import dj_database_url
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+print(BASE_DIR)
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 
