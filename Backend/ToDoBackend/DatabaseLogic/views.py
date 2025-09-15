@@ -67,3 +67,39 @@ def logoutView(request):
     else:
         logout(request)
         return JsonResponse({"message": "User logged out"})
+def getData(request):
+    if(request.method != "POST"):
+        return JsonResponse({"error": "Only POST allowed"}, status=405)
+    elif(not request.user.is_authenticated):
+        return JsonResponse({"error":"User not logged in yet"})
+    else:
+        Tasks = Tasks.objects.filter(user=request.user.username).values()
+        Tasks = list(Tasks)
+        return JsonResponse({"data":Tasks})
+def cleanAll(request):
+    if(not request.user.is_authenticated):
+        return JsonResponse({"error":"User not logged in yet"})
+    else:
+        count,details = Tasks.objects.filter(user=request.user.username).delete()
+        return JsonResponse({"TotalObjDeleted":count,"details":details})
+def deleteSpecific(request):
+    if(request.method != "POST"):
+        return JsonResponse({"error": "Only POST allowed"}, status=405)
+    elif(not request.user.is_authenticated):
+        return JsonResponse({"error":"User not logged in yet"})
+    else:
+        data = json.loads(request.body)
+        ID = data.get("id")
+        name = data.get("name")
+        if(ID):
+            Task = Tasks.objects.get(user=request.user.username,id=ID)
+            message = f"'${Task.name}' task deleted by ID"
+            Task.delete()
+            return JsonResponse({"message":message})
+        elif(name):
+            Task = Tasks.objects.get(user=request.user.username,name=name)
+            message = f"'${Task.name}' task deleted by name"
+            Task.delete()
+            return JsonResponse({"message":message})
+        else:
+            return JsonResponse({"error":"Either the ID or name field need to ahve a value"})
