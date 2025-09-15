@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.contrib.auth.hashers import check_password
 import traceback
 import json
+from .models import Tasks
 
 # Create your views here.
 def get_csrf_token(request):
