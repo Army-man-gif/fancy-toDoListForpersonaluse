@@ -9,6 +9,9 @@ urlpatterns = [
     
     path("login/", views.loginView,name="login"),
     path("logout/", views.logoutView,name="logout"),
-    
+
+    path("getData/", views.getData,name="getData"),
+    path("cleanAll/", views.logoutView,name="cleanAll"),
+    path("deleteSpecific/", views.logoutView,name="deleteSpecific"),
 
 ]
