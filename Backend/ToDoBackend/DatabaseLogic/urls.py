@@ -14,4 +14,6 @@ urlpatterns = [
     path("cleanAll/", views.logoutView,name="cleanAll"),
     path("deleteSpecific/", views.logoutView,name="deleteSpecific"),
 
+    path("batchUpdateTasks/", views.batchUpdateTasks,name="batchUpdateTasks"),
+
 ]
