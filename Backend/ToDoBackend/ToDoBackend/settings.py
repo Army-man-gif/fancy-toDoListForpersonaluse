@@ -36,7 +36,7 @@ ROOT_URLCONF = "ToDoBackend.urls"
 WSGI_APPLICATION = "ToDoBackend.wsgi.application"
 
 INSTALLED_APPS = [
-    "ToDoBackend",
+    "DatabaseLogic",
     "corsheaders",
     "django.contrib.admin",
     "django.contrib.auth",
