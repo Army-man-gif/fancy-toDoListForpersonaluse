@@ -117,15 +117,12 @@ export async function batchupdateTasks() {
   );
   if (updateInBulk.message) {
     if (!privateBrowsing) {
-      localStorage.setItem("batchUpdateSuccess", JSON.stringify(true));
       localStorage.setItem("workouts", JSON.stringify({}));
     } else {
       sessionStorage.setItem("workouts", JSON.stringify({}));
     }
-  } else {
-    if (!privateBrowsing) {
-      localStorage.setItem("batchUpdateSuccess", JSON.stringify(false));
-    }
+  }else{
+    console.log(updateInBulk.error);
   }
 }
 export async function logout() {

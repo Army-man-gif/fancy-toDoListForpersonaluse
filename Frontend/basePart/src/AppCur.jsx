@@ -50,7 +50,7 @@ function App() {
       }
     }
   }, [title]);
-  async function updateFireStore() {
+  async function updateDatabase() {
     const currentTasks = await getData(title);
     const currentTasksIds = currentTasks.map((task) => task.id);
     const localTasksIds = currentVal.map((task) => task.id);
@@ -105,7 +105,7 @@ function App() {
   function pull() {
     if (!isDataFetched) return;
     const waiter = setTimeout(() => {
-      updateFireStore().catch((error) => {
+      updateDatabase().catch((error) => {
         console.log("Error " + error);
         setSyncStatus(false);
       });
