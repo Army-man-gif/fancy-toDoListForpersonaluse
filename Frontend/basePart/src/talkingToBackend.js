@@ -117,9 +117,9 @@ export async function batchupdateTasks() {
   );
   if (updateInBulk.message) {
     if (!privateBrowsing) {
-      localStorage.setItem("workouts", JSON.stringify({}));
+      localStorage.setItem("tasksToUpdate", JSON.stringify({}));
     } else {
-      sessionStorage.setItem("workouts", JSON.stringify({}));
+      sessionStorage.setItem("tasksToUpdate", JSON.stringify({}));
     }
   }else{
     console.log(updateInBulk.error);
