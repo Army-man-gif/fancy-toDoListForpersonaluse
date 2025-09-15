@@ -1,7 +1,7 @@
 import "./App_replacedcss.css";
-import Form from "./Form.jsx";
-import Buttons from "./Buttons.jsx";
-import Task from "./Task.jsx";
+import Form from "../Form.jsx";
+import Buttons from "../Buttons.jsx";
+import Task from "../Task.jsx";
 import { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
