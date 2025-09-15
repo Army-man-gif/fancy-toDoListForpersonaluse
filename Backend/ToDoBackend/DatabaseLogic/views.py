@@ -70,7 +70,7 @@ def logoutView(request):
 def getData(request):
     if(request.method != "POST"):
         return JsonResponse({"error": "Only POST allowed"}, status=405)
-    elif(not request.user.is_authenticated):
+    if(not request.user.is_authenticated):
         return JsonResponse({"error":"User not logged in yet"})
     else:
         Tasks = Tasks.objects.filter(user=request.user.username).values()
@@ -85,7 +85,7 @@ def cleanAll(request):
 def deleteSpecific(request):
     if(request.method != "POST"):
         return JsonResponse({"error": "Only POST allowed"}, status=405)
-    elif(not request.user.is_authenticated):
+    if(not request.user.is_authenticated):
         return JsonResponse({"error":"User not logged in yet"})
     else:
         data = json.loads(request.body)
@@ -103,3 +103,30 @@ def deleteSpecific(request):
             return JsonResponse({"message":message})
         else:
             return JsonResponse({"error":"Either the ID or name field need to ahve a value"})
+def batchUpdateTasks(request):
+    if(request.method != "POST"):
+        return JsonResponse({"error": "Only POST allowed"}, status=405)
+    if(not request.user.is_authenticated):
+        return JsonResponse({"error":"User not logged in yet"})
+    else:
+        data = json.loads(request.body)
+        batchupdateData = data.get("batchUpdate",None)
+        if(batchupdateData is not None):
+            results = []
+            for key,task in batchupdateData.items():
+                taskObj, created = Tasks.objects.update_or_create(
+                    user=request.user,
+                    name=task.get("name", ""),
+                    defaults={
+                        "myDay": task.get("myDay", False),
+                        "isStarred": task.get("isStarred", False),
+                        "isChecked": task.get("isChecked", False),
+                    }
+                )
+                results.append({
+                    "name": taskObj.name,
+                    "created": created,
+                })
+            return JsonResponse({"success":True,"results": results})
+        return JsonResponse({"error": "No batchUpdate data provided"}, status=400)
+
