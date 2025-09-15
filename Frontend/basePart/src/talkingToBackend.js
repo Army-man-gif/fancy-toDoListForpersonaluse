@@ -1,5 +1,5 @@
 const intialBackendString = "https://todolist-bueo.onrender.com/list";
-
+const username = JSON.parse(localStorage.getItem("username")) || "";
 async function getCSRFToken() {
   const fetchTheData = await fetch(`${intialBackendString}/getToken/`, {
     method: "GET",
