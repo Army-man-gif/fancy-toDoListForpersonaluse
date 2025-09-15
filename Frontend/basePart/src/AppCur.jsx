@@ -12,16 +12,46 @@ import {
   updateData,
   cleanAll,
 } from "./testingDatabase.js";
+import { User, justLogin } from "./talkingToBackend.js";
 function App() {
   // Setting up the data saving logic and data storage logic
-  const [title, setTitle] = useState(() => prompt("Enter your name"));
+  const [title, setTitle] = useState("");
   const [syncStatus, setSyncStatus] = useState(false);
   const [count, setCount] = useState(0);
   const [completed, setCompleted] = useState(0);
   const [currentVal, setValues] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
+  const [privateBrowsing, setPrivateBrowsing] = useState(false);
+  function isPrivateBrowsing() {
+    try {
+      localStorage.setItem("__test__", "1");
+      localStorage.removeItem("__test__");
+      setPrivateBrowsing(false);
+    } catch {
+      setPrivateBrowsing(true);
+    }
+  }
+  function pullFromLocal() {
+    try {
+      let pulled;
+      if (privateBrowsing) {
+        pulled = JSON.parse(sessionStorage.getItem("Tasks")) || [];
+      } else {
+        pulled = JSON.parse(localStorage.getItem("Tasks")) || [];
+      }
+      if (Object.keys(pulled).length !== 0) {
+        const parsed = JSON.parse(pulled);
+        setValues(parsed);
+      } else {
+        setValues([]);
+      }
+    } catch (error) {
+      console.error("Failed to fetch data", error);
+      setSyncStatus(false);
+    }
+  }
   async function fetchData() {
-    const savedTasks = await getData(title);
+    const savedTasks = await getData();
     try {
       if (savedTasks) {
         setValues(savedTasks);
@@ -36,18 +66,24 @@ function App() {
     }
   }
   useEffect(() => {
-    if (title) {
-      fetchData().catch((error) => {
-        console.error("Failed to fetch data", error);
-        setSyncStatus(false);
-      });
+    let username;
+    let Tasks;
+    if (privateBrowsing) {
+      username = JSON.parse(sessionStorage.getItem("username")) || "";
+      Tasks = JSON.parse(sessionStorage.getItem("Tasks")) || [];
     } else {
-      try {
-        pullFromLocal();
-      } catch (error) {
-        console.error("Failed to fetch data", error);
-        setSyncStatus(false);
-      }
+      username = JSON.parse(localStorage.getItem("username")) || "";
+      Tasks = JSON.parse(localStorage.getItem("Tasks")) || [];
+    }
+    if (username === "") {
+      User();
+    } else {
+      justLogin(username);
+    }
+    if (Object.keys(Tasks).length === 0) {
+      fetchData();
+    } else {
+      pullFromLocal();
     }
   }, [title]);
   async function updateDatabase() {
@@ -90,15 +126,7 @@ function App() {
     }
     setSyncStatus(true);
   }
-  function pullFromLocal() {
-    const pulled = localStorage.getItem("Tasks");
-    if (pulled) {
-      const parsed = JSON.parse(pulled);
-      setValues(parsed);
-    } else {
-      setValues([]);
-    }
-  }
+
   function overrideLocalStorage() {
     localStorage.setItem("Tasks", JSON.stringify(currentVal));
   }

@@ -54,42 +54,41 @@ export async function SendData(url, data = {}) {
   return response;
 }
 
-export async function User(name="") {
-    if(name==""){
-        let loop = false;
-        let Username = "";
+export async function User(name = "") {
+  if (name == "") {
+    let loop = false;
 
-        do {
-        Username = prompt("Enter username: ").trim();
-        if (Username == "") {
-            alert("You must enter something");
-            loop = true;
-        } else if (Username == null) {
-            alert("You can't cancel");
-            loop = true;
-        } else {
-            loop = false;
-        }
-        } while (loop);
-    }
-    const data = { username: name};
-    const csrftoken = await getCSRFToken();
-    sessionStorage.setItem("csrftoken", JSON.stringify(csrftoken));
-    const user = await SendData(`${intialBackendString}/GetorMakeUser/`, data);
-    if (user["status"]) {
+    do {
+      name = prompt("Enter username: ").trim();
+      if (name == "") {
+        alert("You must enter something");
+        loop = true;
+      } else if (name == null) {
+        alert("You can't cancel");
+        loop = true;
+      } else {
+        loop = false;
+      }
+    } while (loop);
+  }
+  const data = { username: name };
+  const csrftoken = await getCSRFToken();
+  sessionStorage.setItem("csrftoken", JSON.stringify(csrftoken));
+  const user = await SendData(`${intialBackendString}/GetorMakeUser/`, data);
+  if (user["status"]) {
     const sessionid = user["sessionid"];
     sessionStorage.setItem("sessionid", JSON.stringify(sessionid));
     if (!isPrivateBrowsing()) {
-        localStorage.setItem("username", JSON.stringify(user["username"]));
+      localStorage.setItem("username", JSON.stringify(user["username"]));
     } else {
-        sessionStorage.setItem("username", JSON.stringify(user["username"]));
+      sessionStorage.setItem("username", JSON.stringify(user["username"]));
     }
-    } else {
+  } else {
     console.log("Login failed");
-    }
+  }
 }
 export async function justLogin(name) {
-  const data = { username: name};
+  const data = { username: name };
   const csrftoken = await getCSRFToken();
   sessionStorage.setItem("csrftoken", JSON.stringify(csrftoken));
   const user = await SendData(`${intialBackendString}/login/`, data);
@@ -121,7 +120,7 @@ export async function batchupdateTasks() {
     } else {
       sessionStorage.setItem("tasksToUpdate", JSON.stringify({}));
     }
-  }else{
+  } else {
     console.log(updateInBulk.error);
   }
 }
@@ -149,16 +148,19 @@ export async function getData() {
     }
   }
 }
-export async function cleanEverything(){
+export async function cleanEverything() {
   const cleanAll = await SendData(`${intialBackendString}/cleanAll/`);
   if (cleanAll.message) {
     console.log("Deleted all");
   }
 }
-export async function deleteSpecificTask(id){
-    const data = { id: id};
-    const deleteSpecific = await SendData(`${intialBackendString}/deleteSpecific/`,data);
-    if (deleteSpecific.message) {
-        console.log("Deleted task");
+export async function deleteSpecificTask(id) {
+  const data = { id: id };
+  const deleteSpecific = await SendData(
+    `${intialBackendString}/deleteSpecific/`,
+    data,
+  );
+  if (deleteSpecific.message) {
+    console.log("Deleted task");
   }
 }
