@@ -152,3 +152,17 @@ export async function getData() {
     }
   }
 }
+export async function cleanEverything(){
+  const cleanAll = await SendData(`${intialBackendString}/cleanAll/`);
+  if (cleanAll.message) {
+    console.log("Deleted all");
+  }
+}
+export async function deleteSpecificTask(id){
+    const data = { id: id};
+    const deleteSpecific = await SendData(`${intialBackendString}/deleteSpecific/`);
+    if (deleteSpecific.message) {
+        console.log("Deleted task");
+  }
+}
+}
