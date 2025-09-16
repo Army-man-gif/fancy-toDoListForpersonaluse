@@ -94,12 +94,16 @@ def deleteSpecific(request):
     if(not request.user.is_authenticated):
         return JsonResponse({"error":"User not logged in yet"})
     else:
-        data = json.loads(request.body)
-        name = data.get("name","")
-        Task = Tasks.objects.get(user=request.user.username,name=name)
-        message = f"'${Task.name}' task deleted"
-        Task.delete()
-        return JsonResponse({"message":message})
+        try:
+            data = json.loads(request.body)
+            name = data.get("name","")
+            Task = Tasks.objects.get(user=request.user.username,name=name)
+            message = f"'${Task.name}' task deleted"
+            Task.delete()
+            return JsonResponse({"message":message})
+        except Exception as e:
+            traceback.print_exc()
+            return JsonResponse({"status":"failed","error":str(e)},status=400)    
 def batchUpdateTasks(request):
     if(request.method != "POST"):
         return JsonResponse({"error": "Only POST allowed"}, status=405)
