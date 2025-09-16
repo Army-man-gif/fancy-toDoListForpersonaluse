@@ -12,9 +12,15 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 DEBUG = False
 
 SECRET_KEY = os.environ.get("SECRET_KEY","")
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS","").split(",")
-CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS","").split(",")
-CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS","").split(",")
+ALLOWED_HOSTS = [
+    origin.strip() for origin in os.environ.get("ALLOWED_HOSTS", "").split(",") if origin.strip()
+]
+CORS_ALLOWED_ORIGINS = [
+    origin.strip() for origin in os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",") if origin.strip()
+]
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip() for origin in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",") if origin.strip()
+]
 DATABASE_URL = os.environ.get("DATABASE_URL","")
 
 CSRF_COOKIE_SECURE = True      
