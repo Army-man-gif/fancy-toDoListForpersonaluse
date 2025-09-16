@@ -13,7 +13,7 @@ import {
   batchupdateTasks,
   deleteSpecificTask,
 } from "./talkingToBackend.js";
-function App() {
+function AppCur() {
   // Setting up the data saving logic and data storage logic
   const [count, setCount] = useState(0);
   const [completed, setCompleted] = useState(0);
@@ -393,4 +393,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppCur;
