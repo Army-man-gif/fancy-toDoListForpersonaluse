@@ -76,7 +76,7 @@ def getData(request):
         return JsonResponse({"error":"User not logged in yet"})
     else:
         try:
-            TasksFound = Tasks.objects.filter(user=request.user.username).values()
+            TasksFound = Tasks.objects.filter(user=request.user).values()
             TasksFound = list(TasksFound)
             return JsonResponse({"message":"done","Tasks":TasksFound})
         except Exception as e:
