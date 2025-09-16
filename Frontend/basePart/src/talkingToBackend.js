@@ -151,21 +151,12 @@ export async function logout() {
   }
 }
 export async function getData() {
-  const getItAll = (await SendData(`${intialBackendString}/getData/`)) || {};
+  const getItAll = (await SendData(`${intialBackendString}/getData/`)) || [];
   if (getItAll) {
     if (getItAll["message"]) {
-      if (!isPrivateBrowsing()) {
-        console.log("Tasks", getItAll["Tasks"]);
-        localStorage.setItem("Tasks", JSON.stringify(getItAll["Tasks"]));
-      } else {
-        sessionStorage.setItem("Tasks", JSON.stringify(getItAll["Tasks"]));
-      }
+      return getItAll["Tasks"];
     } else {
-      if (!isPrivateBrowsing()) {
-        localStorage.setItem("Tasks", JSON.stringify([]));
-      } else {
-        sessionStorage.setItem("Tasks", JSON.stringify([]));
-      }
+      return [];
     }
   }
 }
