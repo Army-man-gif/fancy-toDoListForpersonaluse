@@ -70,7 +70,7 @@ function AppCur() {
       let result = [];
 
       if (Object.keys(pulled).length !== 0) {
-        result = JSON.parse(pulled);
+        result = pulled;
         setValues(result);
       } else {
         setValues(result);
