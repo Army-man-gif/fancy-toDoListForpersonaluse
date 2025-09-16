@@ -12,10 +12,12 @@ async function getCSRFToken() {
       response = await fetchTheData.json();
       response = response.csrftoken;
     } catch (jsonError) {
+      console.error("Failed to parse JSON:", jsonError);
       response = await fetchTheData.text();
     }
   } else {
     response = await fetchTheData.text();
+    console.warn("Received non-JSON response:");
   }
   console.log(response);
   return response;
