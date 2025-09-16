@@ -50,7 +50,6 @@ function AppCur() {
           await justLogin(username);
         }
         if (Object.keys(Tasks).length === 0) {
-          await batchupdateTasks();
           await fetchData();
         } else {
           pullFromLocal();
@@ -169,7 +168,7 @@ function AppCur() {
   }
 
   // Add tasks
-  function addTask(name) {
+  async function addTask(name) {
     if (name != "") {
       const newValue = {
         id: nanoid(),
@@ -197,6 +196,7 @@ function AppCur() {
           "Tasks",
           JSON.stringify([...currentVal, newValue]),
         );
+        await batchupdateTasks();
       }
     } else {
       alert("You must enter a task");
