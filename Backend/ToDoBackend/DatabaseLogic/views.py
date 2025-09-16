@@ -75,9 +75,13 @@ def getData(request):
     if(not request.user.is_authenticated):
         return JsonResponse({"error":"User not logged in yet"})
     else:
-        TasksFound = Tasks.objects.filter(user=request.user.username).values()
-        TasksFound = list(TasksFound)
-        return JsonResponse({"message":"done","Tasks":TasksFound})
+        try:
+            TasksFound = Tasks.objects.filter(user=request.user.username).values()
+            TasksFound = list(TasksFound)
+            return JsonResponse({"message":"done","Tasks":TasksFound})
+        except Exception as e:
+            traceback.print_exc()
+            return JsonResponse({"status":"failed","error":str(e)},status=400)    
 def cleanAll(request):
     if(not request.user.is_authenticated):
         return JsonResponse({"error":"User not logged in yet"})
