@@ -7,21 +7,18 @@ import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 import {
   getData,
-  addData,
-  clean,
-  updateData,
   cleanAll,
-} from "./testingDatabase.js";
-import { User, justLogin } from "./talkingToBackend.js";
+  User,
+  justLogin,
+  batchupdateTasks,
+  deleteSpecificTask,
+} from "./talkingToBackend.js";
 function App() {
   // Setting up the data saving logic and data storage logic
-  const [title, setTitle] = useState("");
-  const [syncStatus, setSyncStatus] = useState(false);
   const [count, setCount] = useState(0);
   const [completed, setCompleted] = useState(0);
   const [currentVal, setValues] = useState([]);
-  const [isDataFetched, setIsDataFetched] = useState(false);
-  const [privateBrowsing, setPrivateBrowsing] = useState(false);
+  const [privateBrowsing, setPrivateBrowsing] = useState(null);
   function isPrivateBrowsing() {
     try {
       localStorage.setItem("__test__", "1");
@@ -31,6 +28,34 @@ function App() {
       setPrivateBrowsing(true);
     }
   }
+
+  useEffect(() => {
+    isPrivateBrowsing();
+  }, []);
+  useEffect(() => {
+    if (privateBrowsing !== null) {
+      let username;
+      let Tasks;
+      if (privateBrowsing) {
+        username = JSON.parse(sessionStorage.getItem("username")) || "";
+        Tasks = JSON.parse(sessionStorage.getItem("Tasks")) || [];
+      } else {
+        username = JSON.parse(localStorage.getItem("username")) || "";
+        Tasks = JSON.parse(localStorage.getItem("Tasks")) || [];
+      }
+      if (username === "") {
+        User();
+      } else {
+        justLogin(username);
+      }
+      if (Object.keys(Tasks).length === 0) {
+        fetchData();
+      } else {
+        pullFromLocal();
+      }
+    }
+  }, [privateBrowsing]);
+
   function pullFromLocal() {
     try {
       let pulled;
@@ -39,115 +64,44 @@ function App() {
       } else {
         pulled = JSON.parse(localStorage.getItem("Tasks")) || [];
       }
+
+      let result = [];
+
       if (Object.keys(pulled).length !== 0) {
-        const parsed = JSON.parse(pulled);
+        result = JSON.parse(pulled);
         setValues(parsed);
       } else {
-        setValues([]);
+        setValues(result);
+      }
+      if (!privateBrowsing) {
+        localStorage.setItem("tasksToUpdate", JSON.stringify(result));
+      } else {
+        sessionStorage.setItem("tasksToUpdate", JSON.stringify(result));
       }
     } catch (error) {
       console.error("Failed to fetch data", error);
-      setSyncStatus(false);
     }
   }
   async function fetchData() {
-    const savedTasks = await getData();
+    let savedTasks = await getData();
     try {
       if (savedTasks) {
         setValues(savedTasks);
       } else {
-        setValues([]);
+        savedTasks = [];
+        setValues(savedTasks);
       }
-      setIsDataFetched(true);
+      if (privateBrowsing) {
+        sessionStorage.setItem("Tasks", JSON.stringify(savedTasks));
+        sessionStorage.setItem("tasksToUpdate", JSON.stringify(savedTasks));
+      } else {
+        localStorage.setItem("Tasks", JSON.stringify(savedTasks));
+        localStorage.setItem("tasksToUpdate", JSON.stringify(savedTasks));
+      }
     } catch (error) {
       console.error("Failed to fetch data", error);
-      setSyncStatus(false);
-      setIsDataFetched(false);
     }
   }
-  useEffect(() => {
-    let username;
-    let Tasks;
-    if (privateBrowsing) {
-      username = JSON.parse(sessionStorage.getItem("username")) || "";
-      Tasks = JSON.parse(sessionStorage.getItem("Tasks")) || [];
-    } else {
-      username = JSON.parse(localStorage.getItem("username")) || "";
-      Tasks = JSON.parse(localStorage.getItem("Tasks")) || [];
-    }
-    if (username === "") {
-      User();
-    } else {
-      justLogin(username);
-    }
-    if (Object.keys(Tasks).length === 0) {
-      fetchData();
-    } else {
-      pullFromLocal();
-    }
-  }, [title]);
-  async function updateDatabase() {
-    const currentTasks = await getData(title);
-    const currentTasksIds = currentTasks.map((task) => task.id);
-    const localTasksIds = currentVal.map((task) => task.id);
-    for (const task of currentVal) {
-      if (currentTasksIds.includes(task.id)) {
-        const matchedTask = currentTasks.find((t) => t.id === task.id);
-        if (
-          matchedTask.name != task.name ||
-          matchedTask.isChecked != task.isChecked ||
-          matchedTask.myDay != task.myDay ||
-          matchedTask.isStarred != task.isStarred
-        ) {
-          await updateData(
-            task.id,
-            {
-              name: task.name ?? "",
-              isChecked: task.isChecked ?? false,
-              myDay: task.myDay ?? false,
-              isStarred: task.isStarred ?? false,
-            },
-            title,
-          );
-        }
-      } else {
-        await addData(title, task.id, {
-          name: task.name ?? "",
-          isChecked: task.isChecked ?? false,
-          myDay: task.myDay ?? false,
-          isStarred: task.isStarred ?? false,
-        });
-      }
-    }
-    for (const task of currentTasks) {
-      if (!localTasksIds.includes(task.id)) {
-        await clean(title, task.id);
-      }
-    }
-    setSyncStatus(true);
-  }
-
-  function overrideLocalStorage() {
-    localStorage.setItem("Tasks", JSON.stringify(currentVal));
-  }
-  function pull() {
-    if (!isDataFetched) return;
-    const waiter = setTimeout(() => {
-      updateDatabase().catch((error) => {
-        console.log("Error " + error);
-        setSyncStatus(false);
-      });
-    }, 1000);
-    return () => {
-      clearTimeout(waiter);
-    };
-  }
-  useEffect(() => {
-    overrideLocalStorage();
-    if (isDataFetched && title) {
-      pull();
-    }
-  }, [currentVal, title, isDataFetched]);
 
   // Clearing storage logic
   const [storageCleared, setStorageCleared] = useState(false);
@@ -157,12 +111,11 @@ function App() {
       alert("You don't have permission to clear the cloud storage");
     } else {
       try {
-        await cleanAll(title);
+        await cleanAll();
         setValues([]);
         setStorageCleared(true);
       } catch (error) {
         console.error("Failed to clear Firestore:", error);
-        setSyncStatus(false);
       }
     }
   }
@@ -170,7 +123,6 @@ function App() {
   useEffect(() => {
     if (storageCleared) {
       setTimeout(() => {
-        setSyncStatus(true);
         setStorageCleared(false);
       }, 300);
     }
@@ -185,6 +137,11 @@ function App() {
       return task;
     });
     setValues(editedTasks);
+    if (!privateBrowsing) {
+      localStorage.setItem("tasksToUpdate", JSON.stringify(editedTasks));
+    } else {
+      sessionStorage.setItem("tasksToUpdate", JSON.stringify(editedTasks));
+    }
   }
 
   // Delete tasks
@@ -204,6 +161,17 @@ function App() {
         isStarred: false,
       };
       setValues([...currentVal, newValue]);
+      if (!privateBrowsing) {
+        localStorage.setItem(
+          "tasksToUpdate",
+          JSON.stringify([...currentVal, newValue]),
+        );
+      } else {
+        sessionStorage.setItem(
+          "tasksToUpdate",
+          JSON.stringify([...currentVal, newValue]),
+        );
+      }
     } else {
       alert("You must enter a task");
     }
@@ -217,6 +185,11 @@ function App() {
       return task;
     });
     setValues(updatedTasks);
+    if (!privateBrowsing) {
+      localStorage.setItem("tasksToUpdate", JSON.stringify(updatedTasks));
+    } else {
+      sessionStorage.setItem("tasksToUpdate", JSON.stringify(updatedTasks));
+    }
   }
   // starred logic
   function toggleStarred(id) {
@@ -227,6 +200,11 @@ function App() {
       return task;
     });
     setValues(updatedTasks);
+    if (!privateBrowsing) {
+      localStorage.setItem("tasksToUpdate", JSON.stringify(updatedTasks));
+    } else {
+      sessionStorage.setItem("tasksToUpdate", JSON.stringify(updatedTasks));
+    }
   }
   // Tasks completed logic
   const [showConfetti, setShowConfetti] = useState(false);
@@ -243,6 +221,11 @@ function App() {
       return task;
     });
     setValues(updatedTasks);
+    if (!privateBrowsing) {
+      localStorage.setItem("tasksToUpdate", JSON.stringify(updatedTasks));
+    } else {
+      sessionStorage.setItem("tasksToUpdate", JSON.stringify(updatedTasks));
+    }
     if (confetti) {
       setShowConfetti(true);
     } else {
@@ -320,9 +303,6 @@ function App() {
       listHeadingRef.current.focus();
     }
   }, [count, prevTaskLength]);
-  function viewStatus() {
-    alert("Synced: " + syncStatus);
-  }
 
   function detectHyperlink(element) {
     const hyperlinkExists =

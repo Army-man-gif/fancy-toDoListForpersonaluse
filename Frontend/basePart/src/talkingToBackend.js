@@ -148,14 +148,14 @@ export async function getData() {
     }
   }
 }
-export async function cleanEverything() {
+export async function cleanAll() {
   const cleanAll = await SendData(`${intialBackendString}/cleanAll/`);
   if (cleanAll.message) {
     console.log("Deleted all");
   }
 }
-export async function deleteSpecificTask(id) {
-  const data = { id: id };
+export async function deleteSpecificTask(name) {
+  const data = { name: name };
   const deleteSpecific = await SendData(
     `${intialBackendString}/deleteSpecific/`,
     data,
