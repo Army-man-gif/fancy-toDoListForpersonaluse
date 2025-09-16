@@ -101,6 +101,8 @@ def deleteSpecific(request):
             message = f"'${Task.name}' task deleted"
             Task.delete()
             return JsonResponse({"message":message})
+        except Tasks.DoesNotExist:
+            return JsonResponse({"message":"Doesn't exist so nothing to delete"})
         except Exception as e:
             traceback.print_exc()
             return JsonResponse({"status":"failed","error":str(e)},status=400)    
