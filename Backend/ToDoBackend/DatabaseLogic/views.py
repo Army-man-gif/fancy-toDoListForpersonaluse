@@ -97,7 +97,7 @@ def deleteSpecific(request):
         try:
             data = json.loads(request.body)
             name = data.get("name","")
-            Task = Tasks.objects.get(user=request.user.username,name=name)
+            Task = Tasks.objects.get(user=request.user,name=name)
             message = f"'${Task.name}' task deleted"
             Task.delete()
             return JsonResponse({"message":message})
