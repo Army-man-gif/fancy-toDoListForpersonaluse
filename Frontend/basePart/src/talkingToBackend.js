@@ -135,6 +135,7 @@ export async function batchupdateTasks() {
     data,
   );
   if (updateInBulk.message) {
+    console.log("Results", updateInBulk.results);
     if (!privateBrowsing) {
       localStorage.setItem("tasksToUpdate", JSON.stringify([]));
     } else {

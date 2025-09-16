@@ -133,6 +133,6 @@ def batchUpdateTasks(request):
                     "name": taskObj.name,
                     "created": created,
                 })
-            return JsonResponse({"success":True,"results": results})
-        return JsonResponse({"error": "No batchUpdate data provided"}, status=400)
+            return JsonResponse({"success":True,"message":"done","results": results})
+        return JsonResponse({"success":True,"message":"No batchUpdate data provided therefore all good"}, status=400)
 
