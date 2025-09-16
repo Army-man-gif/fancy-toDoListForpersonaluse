@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 
 function Task({
   name,
-  id,
   myDay,
   isChecked,
   toggleTaskCompleted,
@@ -30,7 +29,7 @@ function Task({
   }
   function handleSubmit(e) {
     e.preventDefault();
-    editTask(id, newName);
+    editTask(name, newName);
     setEditing(false);
   }
   function handleChange(e) {
@@ -41,10 +40,10 @@ function Task({
     <form onSubmit={handleSubmit}>
       <div>
         <input
-          id={`edit-${id}`}
+          id={`edit-${name}`}
           type="text"
           value={newName}
-          key={id}
+          key={name}
           onChange={handleChange}
           ref={editFieldRef}
         />
@@ -63,12 +62,12 @@ function Task({
     <>
       <div className="c-cb">
         <input
-          id={`view-${id}`}
+          id={`view-${name}`}
           type="checkbox"
           checked={isChecked}
-          onChange={() => toggleTaskCompleted(id)}
+          onChange={() => toggleTaskCompleted(name)}
         />
-        <label className="todo-label" htmlFor={`view-${id}`}>
+        <label className="todo-label" htmlFor={`view-${name}`}>
           {hyperlinkData ? (
             <>
               {hyperlinkData.text + " "}
@@ -99,7 +98,7 @@ function Task({
           ref={DeleteButton}
           type="button"
           className="btn btn__danger"
-          onClick={() => deleteTask(id)}
+          onClick={() => deleteTask(name)}
           disabled={isChecked}
         >
           Delete <span className="visually-hidden">{newName}</span>
@@ -110,7 +109,7 @@ function Task({
             ref={myDayButton}
             type="button"
             className="btn btn__danger"
-            onClick={() => toggleTomyDay(id)}
+            onClick={() => toggleTomyDay(name)}
             disabled={isChecked}
           >
             Remove from myDay <span className="visually-hidden">{newName}</span>
@@ -120,7 +119,7 @@ function Task({
             ref={myDayButton}
             type="button"
             className="btn btn__danger"
-            onClick={() => toggleTomyDay(id)}
+            onClick={() => toggleTomyDay(name)}
             disabled={isChecked}
           >
             Add to myDay <span className="visually-hidden">{newName}</span>
@@ -130,7 +129,7 @@ function Task({
           type="button"
           ref={StarredButton}
           className="btn star"
-          onClick={() => toggleStarred(id)}
+          onClick={() => toggleStarred(name)}
           aria-label="star-button"
           disabled={isChecked}
         >

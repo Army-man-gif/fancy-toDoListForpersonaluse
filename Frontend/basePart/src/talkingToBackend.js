@@ -38,12 +38,17 @@ export async function SendData(url, data = {}) {
     });
     const contentType = sendData.headers.get("content-type");
     if (contentType && contentType.includes("application/json")) {
-      response = await sendData.json();
+      try {
+        response = await sendData.json();
+      } catch (jsonError) {
+        console.error("Failed to parse JSON:", jsonError);
+        response = await sendData.text();
+      }
     } else {
       response = await sendData.text();
+      console.warn("Received non-JSON response:");
     }
     if (sendData.ok) {
-      //console.log("Server responded with: ", response);
       sessionStorage.setItem("Logged-In", true);
     } else {
       console.log("Server threw an error", response);

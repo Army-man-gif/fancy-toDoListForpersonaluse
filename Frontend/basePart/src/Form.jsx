@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Form({ id, type, addTask }) {
+function Form({ type, addTask }) {
   const [name, setName] = useState("");
 
   function handleChange(event) {
@@ -16,13 +16,13 @@ function Form({ id, type, addTask }) {
     <>
       <form onSubmit={handleSubmit}>
         <h2 className="label-wrapper">
-          <label htmlFor={id} className="label__lg">
+          <label htmlFor="adding" className="label__lg">
             What needs to be done?
           </label>
         </h2>
         <input
           type={type}
-          id={id}
+          id="adding"
           className="input input__lg"
           name="text"
           autoComplete="off"

@@ -33,29 +33,31 @@ function AppCur() {
     isPrivateBrowsing();
   }, []);
   useEffect(() => {
-    if (privateBrowsing !== null) {
-      let username;
-      let Tasks;
-      if (privateBrowsing) {
-        username = JSON.parse(sessionStorage.getItem("username")) || "";
-        Tasks = JSON.parse(sessionStorage.getItem("Tasks")) || [];
-      } else {
-        username = JSON.parse(localStorage.getItem("username")) || "";
-        Tasks = JSON.parse(localStorage.getItem("Tasks")) || [];
+    (async () => {
+      if (privateBrowsing !== null) {
+        let username;
+        let Tasks;
+        if (privateBrowsing) {
+          username = JSON.parse(sessionStorage.getItem("username")) || "";
+          Tasks = JSON.parse(sessionStorage.getItem("Tasks")) || [];
+        } else {
+          username = JSON.parse(localStorage.getItem("username")) || "";
+          Tasks = JSON.parse(localStorage.getItem("Tasks")) || [];
+        }
+        if (username === "") {
+          await User();
+        } else {
+          await justLogin(username);
+        }
+        await batchupdateTasks();
+        if (Object.keys(Tasks).length === 0) {
+          await fetchData();
+        } else {
+          pullFromLocal();
+        }
       }
-      if (username === "") {
-        User();
-      } else {
-        justLogin(username);
-      }
-      if (Object.keys(Tasks).length === 0) {
-        fetchData();
-      } else {
-        pullFromLocal();
-      }
-    }
+    })();
   }, [privateBrowsing]);
-
   function pullFromLocal() {
     try {
       let pulled;
@@ -69,7 +71,7 @@ function AppCur() {
 
       if (Object.keys(pulled).length !== 0) {
         result = JSON.parse(pulled);
-        setValues(parsed);
+        setValues(result);
       } else {
         setValues(result);
       }
@@ -129,9 +131,9 @@ function AppCur() {
   }, [storageCleared]);
 
   // Edit tasks
-  function editTask(id, newName) {
+  function editTask(name, newName) {
     const editedTasks = currentVal.map((task) => {
-      if (id === task.id) {
+      if (name === task.name) {
         return { ...task, name: newName };
       }
       return task;
@@ -145,16 +147,16 @@ function AppCur() {
   }
 
   // Delete tasks
-  function deleteTask(id) {
-    const remainingTasks = currentVal.filter((task) => id !== task.id);
+  async function deleteTask(name) {
+    const remainingTasks = currentVal.filter((task) => name !== task.name);
     setValues(remainingTasks);
+    await deleteSpecificTask(name);
   }
 
   // Add tasks
   function addTask(name) {
     if (name != "") {
       const newValue = {
-        id: `todo-${nanoid()}`,
         name: name,
         isChecked: false,
         myDay: false,
@@ -177,9 +179,9 @@ function AppCur() {
     }
   }
   // myDay logic
-  function toggleTomyDay(id) {
+  function toggleTomyDay(name) {
     const updatedTasks = currentVal.map((task) => {
-      if (id === task.id) {
+      if (name === task.name) {
         return { ...task, myDay: !task.myDay };
       }
       return task;
@@ -192,9 +194,9 @@ function AppCur() {
     }
   }
   // starred logic
-  function toggleStarred(id) {
+  function toggleStarred(name) {
     const updatedTasks = currentVal.map((task) => {
-      if (id === task.id) {
+      if (name === task.name) {
         return { ...task, isStarred: !task.isStarred };
       }
       return task;
@@ -209,13 +211,13 @@ function AppCur() {
   // Tasks completed logic
   const [showConfetti, setShowConfetti] = useState(false);
 
-  function toggleTaskCompleted(id) {
+  function toggleTaskCompleted(name) {
     let confetti = true;
     const updatedTasks = currentVal.map((task) => {
-      if (id === task.id && task.isChecked) {
+      if (name === task.name && task.isChecked) {
         confetti = false;
       }
-      if (id === task.id) {
+      if (name === task.name) {
         return { ...task, isChecked: !task.isChecked };
       }
       return task;
@@ -344,7 +346,7 @@ function AppCur() {
           />
         </div>
       )}
-      <Form id="new-todo-input" type="text" addTask={addTask} />
+      <Form type="text" addTask={addTask} />
       <div className="filtering filters btn-group stack-exception">
         {filterList}
       </div>
@@ -371,10 +373,9 @@ function AppCur() {
         className="todo-list stack-large stack-exception"
         aria-labelledby="list-heading"
       >
-        {filteredEls.map((task) => (
-          <li key={task.id} className="todo stack-small">
+        {filteredEls.map((task, index) => (
+          <li key={index} className="todo stack-small">
             <Task
-              id={task.id}
               name={task.name}
               myDay={task.myDay}
               isStarred={task.isStarred}
