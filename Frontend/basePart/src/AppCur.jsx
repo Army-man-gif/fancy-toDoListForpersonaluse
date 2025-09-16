@@ -141,8 +141,10 @@ function AppCur() {
     setValues(editedTasks);
     if (!privateBrowsing) {
       localStorage.setItem("tasksToUpdate", JSON.stringify(editedTasks));
+      localStorage.setItem("Tasks", JSON.stringify(editedTasks));
     } else {
       sessionStorage.setItem("tasksToUpdate", JSON.stringify(editedTasks));
+      sessionStorage.setItem("Tasks", JSON.stringify(editedTasks));
     }
   }
 
@@ -151,6 +153,13 @@ function AppCur() {
     const remainingTasks = currentVal.filter((task) => name !== task.name);
     setValues(remainingTasks);
     await deleteSpecificTask(name);
+    if (!privateBrowsing) {
+      localStorage.setItem("tasksToUpdate", JSON.stringify(remainingTasks));
+      localStorage.setItem("Tasks", JSON.stringify(remainingTasks));
+    } else {
+      sessionStorage.setItem("tasksToUpdate", JSON.stringify(remainingTasks));
+      sessionStorage.setItem("Tasks", JSON.stringify(remainingTasks));
+    }
   }
 
   // Add tasks
@@ -169,9 +178,17 @@ function AppCur() {
           "tasksToUpdate",
           JSON.stringify([...currentVal, newValue]),
         );
+        localStorage.setItem(
+          "Tasks",
+          JSON.stringify([...currentVal, newValue]),
+        );
       } else {
         sessionStorage.setItem(
           "tasksToUpdate",
+          JSON.stringify([...currentVal, newValue]),
+        );
+        sessionStorage.setItem(
+          "Tasks",
           JSON.stringify([...currentVal, newValue]),
         );
       }
@@ -190,8 +207,10 @@ function AppCur() {
     setValues(updatedTasks);
     if (!privateBrowsing) {
       localStorage.setItem("tasksToUpdate", JSON.stringify(updatedTasks));
+      localStorage.setItem("Tasks", JSON.stringify(updatedTasks));
     } else {
       sessionStorage.setItem("tasksToUpdate", JSON.stringify(updatedTasks));
+      sessionStorage.setItem("Tasks", JSON.stringify(updatedTasks));
     }
   }
   // starred logic
@@ -205,8 +224,10 @@ function AppCur() {
     setValues(updatedTasks);
     if (!privateBrowsing) {
       localStorage.setItem("tasksToUpdate", JSON.stringify(updatedTasks));
+      localStorage.setItem("Tasks", JSON.stringify(updatedTasks));
     } else {
       sessionStorage.setItem("tasksToUpdate", JSON.stringify(updatedTasks));
+      sessionStorage.setItem("Tasks", JSON.stringify(updatedTasks));
     }
   }
   // Tasks completed logic
@@ -226,8 +247,10 @@ function AppCur() {
     setValues(updatedTasks);
     if (!privateBrowsing) {
       localStorage.setItem("tasksToUpdate", JSON.stringify(updatedTasks));
+      localStorage.setItem("Tasks", JSON.stringify(updatedTasks));
     } else {
       sessionStorage.setItem("tasksToUpdate", JSON.stringify(updatedTasks));
+      sessionStorage.setItem("Tasks", JSON.stringify(updatedTasks));
     }
     if (confetti) {
       setShowConfetti(true);
