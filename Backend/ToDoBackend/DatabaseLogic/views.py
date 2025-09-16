@@ -43,7 +43,7 @@ def GetorMakeUser(request):
             return JsonResponse(userDataToReturn)
         except Exception as e:
             traceback.print_exc()
-            return JsonResponse({"error":str(e)},status=400)
+            return JsonResponse({"status":"failed","error":str(e)},status=400)
 # ----------------------------------------------------------------------------------------
 def loginView(request):
     if(request.method != "POST"):
