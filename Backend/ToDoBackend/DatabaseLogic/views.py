@@ -95,20 +95,11 @@ def deleteSpecific(request):
         return JsonResponse({"error":"User not logged in yet"})
     else:
         data = json.loads(request.body)
-        ID = data.get("id")
-        name = data.get("name")
-        if(ID):
-            Task = Tasks.objects.get(user=request.user.username,id=ID)
-            message = f"'${Task.name}' task deleted by ID"
-            Task.delete()
-            return JsonResponse({"message":message})
-        elif(name):
-            Task = Tasks.objects.get(user=request.user.username,name=name)
-            message = f"'${Task.name}' task deleted by name"
-            Task.delete()
-            return JsonResponse({"message":message})
-        else:
-            return JsonResponse({"error":"Either the ID or name field need to ahve a value"})
+        name = data.get("name","")
+        Task = Tasks.objects.get(user=request.user.username,name=name)
+        message = f"'${Task.name}' task deleted"
+        Task.delete()
+        return JsonResponse({"message":message})
 def batchUpdateTasks(request):
     if(request.method != "POST"):
         return JsonResponse({"error": "Only POST allowed"}, status=405)

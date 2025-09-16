@@ -49,11 +49,12 @@ function AppCur() {
         } else {
           await justLogin(username);
         }
-        await batchupdateTasks();
         if (Object.keys(Tasks).length === 0) {
+          await batchupdateTasks();
           await fetchData();
         } else {
           pullFromLocal();
+          await batchupdateTasks();
         }
       }
     })();
