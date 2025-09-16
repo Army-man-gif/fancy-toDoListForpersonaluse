@@ -155,7 +155,7 @@ export async function getData() {
   if (getItAll) {
     if (getItAll["message"]) {
       if (!isPrivateBrowsing()) {
-        console.log(getItAll["Tasks"]);
+        console.log("Tasks", getItAll["Tasks"]);
         localStorage.setItem("Tasks", JSON.stringify(getItAll["Tasks"]));
       } else {
         sessionStorage.setItem("Tasks", JSON.stringify(getItAll["Tasks"]));
