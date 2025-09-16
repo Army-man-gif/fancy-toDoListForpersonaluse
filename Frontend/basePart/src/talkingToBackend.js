@@ -1,4 +1,4 @@
-const intialBackendString = "https:/todolist-bueo.onrender.com/list";
+const intialBackendString = "https://todolist-bueo.onrender.com/list";
 async function getCSRFToken() {
   const fetchTheData = await fetch(`${intialBackendString}/getToken/`, {
     method: "GET",
