@@ -117,6 +117,11 @@ function AppCur() {
         await cleanAll();
         setValues([]);
         setStorageCleared(true);
+        if (!privateBrowsing) {
+          localStorage.setItem("Tasks", JSON.stringify([]));
+        } else {
+          sessionStorage.setItem("Tasks", JSON.stringify([]));
+        }
       } catch (error) {
         console.error("Failed to clear Firestore:", error);
       }
