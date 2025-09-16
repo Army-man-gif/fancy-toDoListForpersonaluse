@@ -140,7 +140,7 @@ export async function batchupdateTasks() {
       sessionStorage.setItem("tasksToUpdate", JSON.stringify([]));
     }
   } else {
-    console.log(updateInBulk.error);
+    console.log("Error", updateInBulk.error);
   }
 }
 export async function logout() {
