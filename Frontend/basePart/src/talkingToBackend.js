@@ -67,7 +67,7 @@ export async function SendData(url, data = {}) {
       console.log("Server threw an error", response);
     }
   } catch (error) {
-    console.log("Error: ", error);
+    console.log("Error in send data function: ", error);
   }
   return response;
 }
