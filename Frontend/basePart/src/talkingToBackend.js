@@ -135,7 +135,6 @@ export async function batchupdateTasks() {
     data,
   );
   if (updateInBulk.message) {
-    console.log("Results", updateInBulk.results);
     if (!privateBrowsing) {
       localStorage.setItem("tasksToUpdate", JSON.stringify([]));
     } else {
@@ -156,6 +155,7 @@ export async function getData() {
   if (getItAll) {
     if (getItAll["message"]) {
       if (!isPrivateBrowsing()) {
+        console.log(getItAll["Tasks"]);
         localStorage.setItem("Tasks", JSON.stringify(getItAll["Tasks"]));
       } else {
         sessionStorage.setItem("Tasks", JSON.stringify(getItAll["Tasks"]));
