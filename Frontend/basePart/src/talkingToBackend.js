@@ -73,11 +73,11 @@ export async function SendData(url, data = {}) {
   return response;
 }
 
-export async function User(name) {
+export async function User() {
   console.log("Here");
   const csrftoken = await getCSRFToken();
   let loop = false;
-
+  let name = "";
   do {
     name = prompt("Enter username: ").trim();
     if (name == "") {
