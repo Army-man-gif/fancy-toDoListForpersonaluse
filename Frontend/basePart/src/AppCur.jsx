@@ -157,6 +157,7 @@ function AppCur() {
   function addTask(name) {
     if (name != "") {
       const newValue = {
+        id: nanoid(),
         name: name,
         isChecked: false,
         myDay: false,
@@ -374,7 +375,7 @@ function AppCur() {
         aria-labelledby="list-heading"
       >
         {filteredEls.map((task, index) => (
-          <li key={index} className="todo stack-small">
+          <li key={task.id || task.name} className="todo stack-small">
             <Task
               name={task.name}
               myDay={task.myDay}
