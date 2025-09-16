@@ -76,22 +76,20 @@ export async function SendData(url, data = {}) {
 export async function User(name) {
   console.log("Here");
   const csrftoken = await getCSRFToken();
-  if (name == "") {
-    let loop = false;
+  let loop = false;
 
-    do {
-      name = prompt("Enter username: ").trim();
-      if (name == "") {
-        alert("You must enter something");
-        loop = true;
-      } else if (name == null) {
-        alert("You can't cancel");
-        loop = true;
-      } else {
-        loop = false;
-      }
-    } while (loop);
-  }
+  do {
+    name = prompt("Enter username: ").trim();
+    if (name == "") {
+      alert("You must enter something");
+      loop = true;
+    } else if (name == null) {
+      alert("You can't cancel");
+      loop = true;
+    } else {
+      loop = false;
+    }
+  } while (loop);
   const data = { username: name };
   sessionStorage.setItem("csrftoken", JSON.stringify(csrftoken));
   const user = await SendData(`${intialBackendString}/GetorMakeUser/`, data);
