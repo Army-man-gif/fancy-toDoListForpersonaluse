@@ -5,8 +5,20 @@ async function getCSRFToken() {
     method: "GET",
     credentials: "include",
   });
-  const cookiesData = await fetchTheData.json();
-  return cookiesData.csrftoken;
+  let response;
+  const contentType = fetchTheData.headers.get("content-type");
+  if (contentType && contentType.includes("application/json")) {
+    try {
+      response = await fetchTheData.json();
+      response = response.csrftoken;
+    } catch (jsonError) {
+      response = await fetchTheData.text();
+    }
+  } else {
+    response = await fetchTheData.text();
+  }
+  console.log(response);
+  return response;
 }
 function isPrivateBrowsing() {
   try {
