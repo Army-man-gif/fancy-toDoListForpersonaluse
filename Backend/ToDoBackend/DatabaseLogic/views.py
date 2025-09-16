@@ -11,8 +11,6 @@ from .models import Tasks
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-@ensure_csrf_cookie
-@require_GET
 def get_csrf_token(request):
     print("GET /list/getToken/ hit!")
     token = get_token(request)
