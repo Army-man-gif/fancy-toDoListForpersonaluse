@@ -130,7 +130,7 @@ export async function batchupdateTasks() {
   }
   const data = { batchUpdate: stored };
   const updateInBulk = await SendData(
-    `${intialBackendString}/batchupdateExercise/`,
+    `${intialBackendString}/batchUpdateTasks/`,
     data,
   );
   if (updateInBulk.message) {
