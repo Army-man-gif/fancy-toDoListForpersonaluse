@@ -73,6 +73,8 @@ export async function SendData(url, data = {}) {
 }
 
 export async function User(name) {
+  console.log("Here");
+  const csrftoken = await getCSRFToken();
   if (name == "") {
     let loop = false;
 
@@ -90,7 +92,6 @@ export async function User(name) {
     } while (loop);
   }
   const data = { username: name };
-  const csrftoken = await getCSRFToken();
   sessionStorage.setItem("csrftoken", JSON.stringify(csrftoken));
   const user = await SendData(`${intialBackendString}/GetorMakeUser/`, data);
   if (user["status"]) {
