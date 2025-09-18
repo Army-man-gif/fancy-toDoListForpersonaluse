@@ -45,6 +45,7 @@ function AppCur() {
           Tasks = JSON.parse(localStorage.getItem("Tasks")) || [];
         }
         if (username == "") {
+          console.log("logging in new");
           await User();
         } else {
           await justLogin(username);

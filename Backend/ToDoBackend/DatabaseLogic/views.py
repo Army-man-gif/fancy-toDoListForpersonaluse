@@ -62,6 +62,7 @@ def loginView(request):
         except User.DoesNotExist:
             return JsonResponse({"error": "User does not exist"}, status=404)
         except Exception as e:
+            traceback.print_exc()
             return JsonResponse({"error":str(e)},status=400)
 def logoutView(request):
     if not request.user.is_authenticated:
