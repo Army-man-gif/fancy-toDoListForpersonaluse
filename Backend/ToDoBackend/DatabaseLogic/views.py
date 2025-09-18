@@ -33,11 +33,11 @@ def GetorMakeUser(request):
             username = data.get("username")
             user,created = User.objects.get_or_create(username=username)
             user.save()
-            login(request, user)
             if not request.session.session_key:
                 request.session.save()
             sessionid = request.session.session_key
             csrftoken = get_token(request)
+            login(request, user)
             message = "User created and logged in" if created else "User fetched and logged in"
             userDataToReturn = {"username":user.username,"sessionid":sessionid,"csrftoken":csrftoken,"status":message}
             return JsonResponse(userDataToReturn)
