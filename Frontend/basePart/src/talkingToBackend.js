@@ -18,7 +18,6 @@ async function getCSRFToken() {
     response = await fetchTheData.text();
     console.warn("Received non-JSON response:");
   }
-  console.log(response);
   return response;
 }
 function isPrivateBrowsing() {
@@ -71,9 +70,7 @@ export async function SendData(url, data = {}) {
   }
   return response;
 }
-
 export async function User() {
-  console.log("Here");
   const csrftoken = await getCSRFToken();
   let loop = false;
   let name = "";
@@ -120,7 +117,6 @@ export async function justLogin(name) {
     return false;
   }
 }
-
 export async function batchupdateTasks() {
   let stored = {};
   let privateBrowsing = false;
