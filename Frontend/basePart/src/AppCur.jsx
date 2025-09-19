@@ -421,7 +421,15 @@ function AppCur() {
           <></>
         )}
       */}
-        {!empty ? (
+        {filter == "Completed" ? (
+          !empty ? (
+            <>
+              {count} {countNoun} completed
+            </>
+          ) : (
+            <>No tasks remaining</>
+          )
+        ) : !empty ? (
           <>
             {count} {countNoun} remaining
           </>
