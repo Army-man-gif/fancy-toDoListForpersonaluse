@@ -376,13 +376,7 @@ function AppCur() {
       }
       const link = element.substring(indexStart);
       const text = element.substring(0, indexStart).trim();
-      let alias = link.startsWith("https")
-        ? link.split("/")[2]
-        : link.split("/")[0] || "link";
-      const parts = alias.split(".");
-      if (parts.length > 2 && parts[0] === "www") {
-        alias = parts.slice(1).join(".");
-      }
+      let alias = link.split("/")[2] || "link";
       return { text, link, alias };
     } else {
       return null;
