@@ -194,7 +194,7 @@ function AppCur() {
         myDay: false,
         isStarred: false,
       };
-      setValues([...currentVal, newValue]);
+      setValues([newValue, ...currentVal]);
       if (!privateBrowsing) {
         localStorage.setItem(
           "tasksToUpdate",
