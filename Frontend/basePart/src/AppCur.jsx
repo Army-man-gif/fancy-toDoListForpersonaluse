@@ -294,13 +294,13 @@ function AppCur() {
   let countNoun = "tasks";
   let countNoun2 = "tasks";
   // Set up the different filters
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState("Active");
   const FILTER_MAP = {
-    All: () => true,
     Active: (task) => !task.isChecked,
+    All: () => true,
     Completed: (task) => task.isChecked,
     Clear_Storage: () => true,
-    MyDay: (task) => task.myDay,
+    MyDay: (task) => task.myDay && !task.isChecked,
     importantTasks: (task) => task.isStarred && !task.isChecked,
   };
   const FILTER_NAMES = Object.keys(FILTER_MAP);
@@ -317,7 +317,7 @@ function AppCur() {
     />
   ));
   let filteredEls = currentVal.filter(FILTER_MAP[filter]);
-  if (["All", "MyDay"].includes(filter)) {
+  if (["Active", "All", "MyDay"].includes(filter)) {
     filteredEls = filteredEls.sort((a, b) => {
       if (a.isChecked !== b.isChecked) {
         return a.isChecked ? 1 : -1;
@@ -411,6 +411,7 @@ function AppCur() {
         {filterList}
       </div>
       <h2 id="list-heading" tabIndex="-1" ref={listHeadingRef}>
+        {/*
         {filter == "MyDay" ? (
           <>
             {completed} {countNoun2} completed
@@ -419,6 +420,7 @@ function AppCur() {
         ) : (
           <></>
         )}
+      */}
         {!empty ? (
           <>
             {count} {countNoun} remaining
