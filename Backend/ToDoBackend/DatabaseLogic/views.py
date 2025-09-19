@@ -42,8 +42,12 @@ def GetorMakeUser(request):
             userDataToReturn = {"username":user.username,"sessionid":sessionid,"csrftoken":csrftoken,"status":message}
             return JsonResponse(userDataToReturn)
         except Exception as e:
-            traceback.print_exc()
-            return JsonResponse({"status":"failed","error":str(e)},status=400)
+            return JsonResponse({
+                "status": "failed",
+                "error_type": e.__class__.__name__,
+                "error_message": str(e),
+                "traceback": traceback.format_exc()
+            }, status=500)
 # ----------------------------------------------------------------------------------------
 def loginView(request):
     if(request.method != "POST"):
@@ -62,8 +66,12 @@ def loginView(request):
         except User.DoesNotExist:
             return JsonResponse({"error": "User does not exist"}, status=404)
         except Exception as e:
-            traceback.print_exc()
-            return JsonResponse({"error":str(e)},status=400)
+            return JsonResponse({
+                "status": "failed",
+                "error_type": e.__class__.__name__,
+                "error_message": str(e),
+                "traceback": traceback.format_exc()
+            }, status=500)
 def logoutView(request):
     if not request.user.is_authenticated:
         return JsonResponse({"error":"User not logged in yet"})
@@ -81,8 +89,12 @@ def getData(request):
             TasksFound = list(TasksFound)
             return JsonResponse({"message":"done","Tasks":TasksFound})
         except Exception as e:
-            traceback.print_exc()
-            return JsonResponse({"status":"failed","error":str(e)},status=400)    
+            return JsonResponse({
+                "status": "failed",
+                "error_type": e.__class__.__name__,
+                "error_message": str(e),
+                "traceback": traceback.format_exc()
+            }, status=500)   
 def cleanAll(request):
     if(not request.user.is_authenticated):
         return JsonResponse({"error":"User not logged in yet"})
@@ -105,8 +117,12 @@ def deleteSpecific(request):
         except Tasks.DoesNotExist:
             return JsonResponse({"message":"Doesn't exist so nothing to delete"})
         except Exception as e:
-            traceback.print_exc()
-            return JsonResponse({"status":"failed","error":str(e)},status=400)    
+            return JsonResponse({
+                "status": "failed",
+                "error_type": e.__class__.__name__,
+                "error_message": str(e),
+                "traceback": traceback.format_exc()
+            }, status=500)    
 def batchUpdateTasks(request):
     if(request.method != "POST"):
         return JsonResponse({"error": "Only POST allowed"}, status=405)

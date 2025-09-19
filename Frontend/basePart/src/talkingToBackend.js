@@ -101,8 +101,10 @@ export async function User() {
     } else {
       sessionStorage.setItem("username", JSON.stringify(user["username"]));
     }
+    return true;
   } else {
     console.log("Login failed");
+    return false;
   }
 }
 export async function justLogin(name) {
@@ -113,8 +115,10 @@ export async function justLogin(name) {
   if (user.message) {
     const sessionid = user["sessionid"];
     sessionStorage.setItem("sessionid", JSON.stringify(sessionid));
+    return true;
   } else {
     console.log("Login failed");
+    return false;
   }
 }
 

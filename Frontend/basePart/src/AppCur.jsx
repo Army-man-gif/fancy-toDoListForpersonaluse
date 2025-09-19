@@ -36,29 +36,43 @@ function AppCur() {
     (async () => {
       if (privateBrowsing !== null) {
         let username;
-        let Tasks;
         if (privateBrowsing) {
           username = JSON.parse(sessionStorage.getItem("username")) || "";
-          Tasks = JSON.parse(sessionStorage.getItem("Tasks")) || [];
         } else {
           username = JSON.parse(localStorage.getItem("username")) || "";
-          Tasks = JSON.parse(localStorage.getItem("Tasks")) || [];
         }
         if (username == "") {
-          console.log("logging in new");
-          await User();
+          const makeUser = await User();
+          if (makeUser) {
+            await obtainData();
+          } else {
+            console.log("Failed to create user/ log newly created user in");
+          }
         } else {
-          await justLogin(username);
-        }
-        if (Object.keys(Tasks).length === 0) {
-          await fetchData();
-        } else {
-          pullFromLocal();
-          await batchupdateTasks();
+          const loginUser = await justLogin(username);
+          if (loginUser) {
+            await obtainData();
+          } else {
+            console.log("Failed to log-in user");
+          }
         }
       }
     })();
   }, [privateBrowsing]);
+  async function obtainData() {
+    let Tasks;
+    if (privateBrowsing) {
+      Tasks = JSON.parse(sessionStorage.getItem("Tasks")) || [];
+    } else {
+      Tasks = JSON.parse(localStorage.getItem("Tasks")) || [];
+    }
+    if (Object.keys(Tasks).length === 0) {
+      await fetchData();
+    } else {
+      pullFromLocal();
+      await batchupdateTasks();
+    }
+  }
   function pullFromLocal() {
     try {
       let pulled;
