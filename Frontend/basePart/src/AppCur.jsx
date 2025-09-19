@@ -319,11 +319,15 @@ function AppCur() {
   let filteredEls = currentVal.filter(FILTER_MAP[filter]);
   if (["All", "MyDay"].includes(filter)) {
     filteredEls = filteredEls.sort((a, b) => {
-      if (a.isChecked === b.isChecked) {
-        return 0;
-      } else {
+      if (a.isChecked !== b.isChecked) {
         return a.isChecked ? 1 : -1;
       }
+      if (!a.isChecked && !b.isChecked) {
+        if (a.isStarred !== b.isStarred) {
+          return a.isStarred ? -1 : 1;
+        }
+      }
+      return 0;
     });
   }
   useEffect(() => {
