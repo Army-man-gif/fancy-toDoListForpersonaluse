@@ -366,12 +366,23 @@ function AppCur() {
 
   function detectHyperlink(element) {
     const hyperlinkExists =
-      element.includes("https") || element.includes("http");
+      element.includes("https") ||
+      element.includes("http") ||
+      element.includes("www");
     if (hyperlinkExists) {
-      const indexStart = element.indexOf("http");
+      let indexStart = element.indexOf("http");
+      if (indexStart === -1) {
+        indexStart = element.indexOf("www");
+      }
       const link = element.substring(indexStart);
       const text = element.substring(0, indexStart).trim();
-      const alias = link.split("/")[2] || "link";
+      let alias = link.startsWith("https")
+        ? link.split("/")[2]
+        : link.split("/")[0] || "link";
+      const parts = alias.split(".");
+      if (parts.length > 2 && parts[0] === "www") {
+        alias = parts.slice(1).join(".");
+      }
       return { text, link, alias };
     } else {
       return null;
