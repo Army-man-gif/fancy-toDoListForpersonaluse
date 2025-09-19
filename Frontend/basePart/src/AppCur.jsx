@@ -294,14 +294,13 @@ function AppCur() {
   let countNoun = "tasks";
   let countNoun2 = "tasks";
   // Set up the different filters
-  const [filter, setFilter] = useState("Active");
+  const [filter, setFilter] = useState("MyDay");
   const FILTER_MAP = {
+    MyDay: (task) => task.myDay && !task.isChecked,
+    importantTasks: (task) => task.isStarred && !task.isChecked,
     Active: (task) => !task.isChecked,
     All: () => true,
     Completed: (task) => task.isChecked,
-    Clear_Storage: () => true,
-    MyDay: (task) => task.myDay && !task.isChecked,
-    importantTasks: (task) => task.isStarred && !task.isChecked,
   };
   const FILTER_NAMES = Object.keys(FILTER_MAP);
 
@@ -313,7 +312,6 @@ function AppCur() {
       isPressed={name === filter}
       setFilter={setFilter}
       setValues={setValues}
-      handleClearStorage={handleClearStorage}
     />
   ));
   let filteredEls = currentVal.filter(FILTER_MAP[filter]);
