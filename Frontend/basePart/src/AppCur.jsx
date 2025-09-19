@@ -316,7 +316,16 @@ function AppCur() {
       handleClearStorage={handleClearStorage}
     />
   ));
-  const filteredEls = currentVal.filter(FILTER_MAP[filter]);
+  let filteredEls = currentVal.filter(FILTER_MAP[filter]);
+  if (["MyDay"].includes(filter)) {
+    filteredEls = filteredEls.sort((a, b) => {
+      if (a.isChecked === b.isChecked) {
+        return 0;
+      } else {
+        return a.isChecked ? 1 : -1;
+      }
+    });
+  }
   useEffect(() => {
     setCount(filteredEls.length);
   }, [filteredEls.length]);
