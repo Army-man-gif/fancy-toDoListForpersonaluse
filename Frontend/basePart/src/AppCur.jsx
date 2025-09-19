@@ -317,7 +317,7 @@ function AppCur() {
     />
   ));
   let filteredEls = currentVal.filter(FILTER_MAP[filter]);
-  if (["MyDay"].includes(filter)) {
+  if (["All", "MyDay"].includes(filter)) {
     filteredEls = filteredEls.sort((a, b) => {
       if (a.isChecked === b.isChecked) {
         return 0;
