@@ -16,13 +16,10 @@ class CustomCsrfMiddleware(CsrfViewMiddleware):
         if session_from_header:
             request.COOKIES['sessionid'] = session_from_header
             session = Session.objects.filter(session_key=session_from_header).first()
-            if session:
-                uid = session.get_decoded().get('_auth_user_id')
-                User = get_user_model()
-                request.user = User.objects.get(pk=uid)
-                print(f"Custom session Middleware hit!")
-            else:
-                print("Session not found for provided sessionid")
+            uid = session.get_decoded().get('_auth_user_id')
+            User = get_user_model()
+            request.user = User.objects.get(pk=uid)
+            print(f"Custom session Middleware hit!")
 
 
         return super().process_view(request, callback, callback_args, callback_kwargs)
