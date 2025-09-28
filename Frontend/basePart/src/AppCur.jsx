@@ -69,23 +69,16 @@ function AppCur() {
     if (Object.keys(Tasks).length === 0) {
       await fetchData();
     } else {
-      pullFromLocal();
+      pullFromLocal(Tasks);
       await batchupdateTasks();
     }
   }
-  function pullFromLocal() {
+  function pullFromLocal(Tasks) {
     try {
-      let pulled;
-      if (privateBrowsing) {
-        pulled = JSON.parse(sessionStorage.getItem("Tasks")) || [];
-      } else {
-        pulled = JSON.parse(localStorage.getItem("Tasks")) || [];
-      }
-
       let result = [];
 
-      if (Object.keys(pulled).length !== 0) {
-        result = pulled;
+      if (Object.keys(Tasks).length !== 0) {
+        result = Tasks;
         setValues(result);
       } else {
         setValues(result);
